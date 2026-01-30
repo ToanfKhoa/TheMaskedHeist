@@ -11,5 +11,14 @@ public class Security : MonoBehaviour
                 GameManager.Instance.HandlePlayerFound();
             }
         }
+
+        if (collision.CompareTag("Obsticle"))
+        {
+            Obsticle obsticle = collision.GetComponent<Obsticle>();
+            if (obsticle != null)
+            {
+                obsticle.LaunchAndSpin((int)transform.localScale.x);
+            }
+        }
     }
 }
