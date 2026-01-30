@@ -26,7 +26,6 @@ public class Exit : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            Debug.Log("VICTORY");
             if (GameManager.Instance != null)
             {
                 GameManager.Instance.HandleWin();
