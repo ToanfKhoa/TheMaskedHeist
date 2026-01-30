@@ -5,9 +5,11 @@ using UnityEngine.Events;
 
 public class PlayerDetector : MonoBehaviour
 {
+    [SerializeField] GameObject mask;
     [SerializeField] ColorChecker colorChecker;
     [SerializeField] float delayTime = 0.5f;
-    [SerializeField] UnityEvent onFoundPlayer;
+    [SerializeField] int acceptableColorDifference = 90;
+    [SerializeField] UnityEvent onFoundPlayer = new();
 
     private Coroutine checkPlayerColorCoroutine = null;
     private void Start()
@@ -20,14 +22,23 @@ public class PlayerDetector : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        PlayerController detectedPlayer = collision.GetComponent<PlayerController>();
+        if (mask == null || mask.GetComponent<SpriteRenderer>() || detectedPlayer == null) return;
+        
         if (checkPlayerColorCoroutine == null)
         {
-            checkPlayerColorCoroutine = StartCoroutine(CheckPlayerColorAfterDelay());
+            checkPlayerColorCoroutine = StartCoroutine(CheckPlayerColorAfterDelay(detectedPlayer.GetMaskColor()));
         }
     }
-    IEnumerator CheckPlayerColorAfterDelay()
+    IEnumerator CheckPlayerColorAfterDelay(Color playerColor)
     {
         yield return new WaitForSeconds(delayTime);
-        //if (colorChecker.CompareColorHSV())
+        if (colorChecker.CompareColorHSV(mask.GetComponent<SpriteRenderer>().color, playerColor) < acceptableColorDifference)
+        {
+            if (onFoundPlayer != null)
+            {
+                onFoundPlayer.Invoke();
+            }
+        }
     }
 }
