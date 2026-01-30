@@ -18,16 +18,15 @@ public class PlayerController : MonoBehaviour
     }
 
     // -------------------------
-    // INPUT SYSTEM (Sent by PlayerInput component)
+    // INPUT
     // -------------------------
     public void OnMove(InputAction.CallbackContext context)
     {
-        // Reads value from WASD or Arrow Keys or Gamepad Stick
         moveInput = context.ReadValue<Vector2>();
     }
 
     // -------------------------
-    // LOGIC UPDATE (Visuals)
+    // VISUALS
     // -------------------------
     private void Update()
     {
@@ -36,34 +35,32 @@ public class PlayerController : MonoBehaviour
     }
 
     // -------------------------
-    // PHYSICS UPDATE (Movement)
+    // PHYSICS
     // -------------------------
     private void FixedUpdate()
     {
-        // Apply movement using Rigidbody position (prevents jitter/collision issues)
-        // Normalized ensures diagonal movement isn't faster
         Vector2 currentMove = moveInput.normalized * moveSpeed * Time.fixedDeltaTime;
-        rb.MovePosition(rb.position + currentMove);
+        Vector2 targetPosition = rb.position + currentMove;
+
+        rb.MovePosition(targetPosition);
     }
 
     // -------------------------
-    // VISUAL HELPERS
+    // HELPER METHODS
     // -------------------------
     private void HandleAnimations()
     {
         if (animator != null)
         {
-            // Set running boolean if input magnitude is > 0
             animator.SetBool("isRunning", moveInput.sqrMagnitude > 0);
         }
     }
 
     private void HandleSpriteFlip()
     {
-        // Flip sprite based on X direction
         if (moveInput.x > 0)
-            transform.localScale = new Vector3(-1, 1, 1); // Face Right
+            transform.localScale = new Vector3(-1, 1, 1);
         else if (moveInput.x < 0)
-            transform.localScale = new Vector3(1, 1, 1);  // Face Left
+            transform.localScale = new Vector3(1, 1, 1);
     }
 }
