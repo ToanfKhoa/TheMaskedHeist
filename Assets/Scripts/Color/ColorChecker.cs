@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 public class ColorChecker : MonoBehaviour
 {
-    public int CompareColorHSv(Color playerColor, Color attendeeColor)
+    public int CompareColorHSV(Color playerColor, Color attendeeColor)
     {
         float h1, s1, v1;
         float h2, s2, v2;

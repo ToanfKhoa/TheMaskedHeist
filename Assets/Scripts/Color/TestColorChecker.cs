@@ -12,7 +12,7 @@ public class TestColorChecker : MonoBehaviour
     }
     private void Update()
     {
-        int score = colorChecker.CompareColorHSv(ColorChecker.GetColorFromGameObject(this.gameObject), ColorChecker.GetColorFromGameObject(target));
+        int score = colorChecker.CompareColorHSV(ColorChecker.GetColorFromGameObject(this.gameObject), ColorChecker.GetColorFromGameObject(target));
         scoreText.text = score.ToString();
     }
 }
