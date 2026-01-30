@@ -4,70 +4,89 @@ using UnityEditor;
 [CustomEditor(typeof(TeleportDoor))]
 public class TeleportDoorEditor : Editor
 {
-    // This function draws tools inside the Scene View
     private void OnSceneGUI()
     {
-        // 1. Get reference to the script
         TeleportDoor door = (TeleportDoor)target;
 
-        // 2. If no destination is set, stop here
         if (door.destinationPoint == null) return;
 
-        // 3. Create a handle (the move tool gizmo) at the destination point
         EditorGUI.BeginChangeCheck();
 
+        // Draw a handle at the destination
+        // Since the destination is now the OTHER door, moving this handle 
+        // moves the other door entirely!
         Vector3 newPosition = Handles.PositionHandle(
             door.destinationPoint.position,
             Quaternion.identity
         );
 
-        // 4. If the user moved the handle, update the transform
         if (EditorGUI.EndChangeCheck())
         {
-            // Allow Undo (Ctrl+Z) functionality
-            Undo.RecordObject(door.destinationPoint, "Move Door Exit");
+            Undo.RecordObject(door.destinationPoint, "Move Connected Door");
             door.destinationPoint.position = newPosition;
         }
 
-        // 5. Draw a visual line connecting Door -> Exit
-        Handles.color = Color.green;
+        // Draw line
+        Handles.color = Color.cyan; // Changed color to indicate a door connection
         Handles.DrawDottedLine(door.transform.position, door.destinationPoint.position, 4f);
 
-        // 6. Draw a Label so you can see it clearly
-        Handles.Label(door.destinationPoint.position + Vector3.up * 0.5f, "Exit Point");
+        // Draw Label
+        GUIStyle style = new GUIStyle();
+        style.normal.textColor = Color.cyan;
+        style.alignment = TextAnchor.MiddleCenter;
+        Handles.Label(door.destinationPoint.position + Vector3.up * 1.0f, "Connected Door", style);
     }
 
-    // This function customizes the Inspector window (where variables are)
     public override void OnInspectorGUI()
     {
-        // Draw the default inspector (variables)
         DrawDefaultInspector();
 
         TeleportDoor door = (TeleportDoor)target;
 
-        // Add a helpful button to create the exit point automatically
+        // Only show button if there is no destination linked
         if (door.destinationPoint == null)
         {
             EditorGUILayout.Space();
-            if (GUILayout.Button("Create Exit Point"))
+            // Changed button function
+            if (GUILayout.Button("Create Linked Door"))
             {
-                CreateExitPoint(door);
+                CreateLinkedDoor(door);
             }
         }
     }
-
-    private void CreateExitPoint(TeleportDoor door)
+    private void CreateLinkedDoor(TeleportDoor sourceDoor)
     {
-        // Create a new empty GameObject
-        GameObject exitPoint = new GameObject(door.name + "_Exit");
+        // 1. Create the new door
+        GameObject newDoorObj = Instantiate(sourceDoor.gameObject);
+        newDoorObj.name = sourceDoor.name + " (Linked)";
+        newDoorObj.transform.position = sourceDoor.transform.position + Vector3.right * 4;
+        newDoorObj.transform.parent = sourceDoor.transform.parent;
 
-        // Position it slightly to the right of the door
-        exitPoint.transform.position = door.transform.position + Vector3.right * 2;
+        // 2. Register Undo for the creation of the NEW object
+        Undo.RegisterCreatedObjectUndo(newDoorObj, "Create Linked Door");
 
-        // Assign it to the script
-        door.destinationPoint = exitPoint.transform;
+        // 3. IMPORTANT: Record Undo for the SOURCE door
+        // We must do this BEFORE changing variables on the source door
+        Undo.RecordObject(sourceDoor, "Link Door Reference");
 
-        // Register Undo so you can Ctrl+Z the creation
-        Undo.RegisterCreatedObjectUndo(exitPoint, "Create Door Exit");
+        // 4. Link Source -> New
+        sourceDoor.destinationPoint = newDoorObj.transform;
+
+        // 5. Link New -> Source
+        TeleportDoor newDoorScript = newDoorObj.GetComponent<TeleportDoor>();
+        if (newDoorScript != null)
+        {
+            // We don't need Undo here because newDoorObj is fresh
+            newDoorScript.destinationPoint = sourceDoor.transform;
+        }
+
+        // 6. CRITICAL: Mark the source object as "Dirty"
+        // This forces Unity to recognize the change and save it to the scene
+        EditorUtility.SetDirty(sourceDoor);
+
+        // 7. Select the new door
+        Selection.activeGameObject = newDoorObj;
+
+        Debug.Log("Created new door and linked them bi-directionally!");
     }
 }
