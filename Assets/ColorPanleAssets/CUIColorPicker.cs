@@ -186,7 +186,7 @@ public class CUIColorPicker : MonoBehaviour
 
     void Awake()
     {
-        Color = Color.gray; //mac dinh ban dau color la red
+        Color = Color.red; //mac dinh ban dau color la red
     }
 
     void Update()
