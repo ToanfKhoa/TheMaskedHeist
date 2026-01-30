@@ -3,7 +3,7 @@ using UnityEngine;
 public class AttendeeMovement : MonoBehaviour
 {
     [Header("Movement Settings")]
-    [SerializeField] float insideSpeed = 5f;
+    [SerializeField] float insideSpeed = 1f;
     [SerializeField] float outsideSpeed = 2f;
     [SerializeField] TargetZone targetZone;
     [SerializeField] Vector2 wanderingInterval = new Vector2(1f, 3f);
@@ -34,10 +34,10 @@ public class AttendeeMovement : MonoBehaviour
             wanderingTarget = targetZone.GetRelativeRandomPoint();
             wanderingTimer = Random.Range(wanderingInterval.x, wanderingInterval.y);
         }
+        Debug.Log("Relative: " + wanderingTarget);
         Vector2 direction = (wanderingTarget + (Vector2)targetZone.transform.position - (Vector2)transform.position).normalized;
         if ((wanderingTarget + (Vector2)targetZone.transform.position - (Vector2)transform.position).magnitude < minDistanceToTarget)
         {
-            Debug.Log("Distance: " + (wanderingTarget - (Vector2)transform.position).magnitude);
             rb.linearVelocity = Vector2.zero;
             return;
         }

@@ -4,7 +4,7 @@ public class TargetZone : MonoBehaviour
 {
     public enum ZoneShape { Circle, Rectangle }
     [Header("Target Zone Settings")]
-    [SerializeField] ZoneShape zoneShape = ZoneShape.Circle;
+    [SerializeField] ZoneShape zoneShape = ZoneShape.Rectangle;
     [SerializeField] private float radius = 3f;
     [SerializeField] private Vector2 size = new Vector2(3f, 3f);
     [SerializeField] private float deadZoneThinkness = 0.5f;
