@@ -1,9 +1,11 @@
 using UnityEngine;
+using TMPro;
 
 public class TestColorChecker : MonoBehaviour
 {
     ColorChecker colorChecker;
     public GameObject target;
+    public TextMeshProUGUI scoreText;
     private void Start()
     {
         colorChecker = new ColorChecker();
@@ -11,6 +13,6 @@ public class TestColorChecker : MonoBehaviour
     private void Update()
     {
         int score = colorChecker.CompareColorHSv(ColorChecker.GetColorFromGameObject(this.gameObject), ColorChecker.GetColorFromGameObject(target));
-        Debug.Log(score);
+        scoreText.text = score.ToString();
     }
 }
