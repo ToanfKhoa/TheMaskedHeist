@@ -12,6 +12,8 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb;
     private Animator animator;
 
+    [SerializeField] private Transform holdPivot;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -76,5 +78,14 @@ public class PlayerController : MonoBehaviour
             }
         }
         return Color.white;
+    }
+
+    public void HoldDiamond(GameObject diamond)
+    {
+        if (holdPivot != null && diamond != null)
+        {
+            diamond.transform.SetParent(holdPivot);
+            diamond.transform.localPosition = Vector3.zero;
+        }
     }
 }
