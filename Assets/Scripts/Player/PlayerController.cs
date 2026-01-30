@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     [Header("Movement Settings")]
     [SerializeField] private float moveSpeed = 5f;
+    [SerializeField] GameObject mask;
 
     private Vector2 moveInput = Vector2.zero;
     private Rigidbody2D rb;
@@ -62,5 +63,18 @@ public class PlayerController : MonoBehaviour
             transform.localScale = new Vector3(-1, 1, 1);
         else if (moveInput.x < 0)
             transform.localScale = new Vector3(1, 1, 1);
+    }
+
+    public Color GetMaskColor()
+    {
+        if (mask != null)
+        {
+            SpriteRenderer sr = mask.GetComponent<SpriteRenderer>();
+            if (sr != null)
+            {
+                return sr.color;
+            }
+        }
+        return Color.white;
     }
 }
