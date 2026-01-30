@@ -1,8 +1,9 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ColorChecker : MonoBehaviour
 {
-    public float CompareColorHSv(Color playerColor, Color attendeeColor)
+    public int CompareColorHSv(Color playerColor, Color attendeeColor)
     {
         float h1, s1, v1;
         float h2, s2, v2;
@@ -14,18 +15,17 @@ public class ColorChecker : MonoBehaviour
         // Tinh khoang cach Euclidean giua hai mau HSV
         float coichungmaudo = Mathf.Min(Mathf.Abs(h1 - h2), 1 - Mathf.Abs(h1 - h2));
         float distance = Mathf.Sqrt(
-            Mathf.Pow(coichungmaudo, 2) * trongso +
+            Mathf.Pow(coichungmaudo, 2) +
             Mathf.Pow(s1 - s2, 2) +
             Mathf.Pow(v1 - v2, 2)
         );
 
         //chuan hoa ve gia tri tu 0 toi 1
-        float colorComparisionValue = 1 - (distance / Mathf.Sqrt(trongso + 2)); //sqrt(3) do khoang cach toi da cua 2 mau la sqrt(3)
-        score = (int)(colorComparisionValue * 100);
-        //score = Mathf.Round(colorComparisionValue * 100);
+        float colorComparisionValue = 1 - (distance / Mathf.Sqrt(2)); //sqrt(3) do khoang cach toi da cua 2 mau la sqrt(3)
+        int score = (int)(colorComparisionValue * 100);
         return score;
     }
-    private static Color GetColorFromGameObject(GameObject obj)
+    public static Color GetColorFromGameObject(GameObject obj)
     {
         // Kiem tra neu object cco spriterenderer
         SpriteRenderer spriteRenderer = obj.GetComponent<SpriteRenderer>();
