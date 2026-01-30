@@ -1,8 +1,8 @@
 using UnityEngine;
 using UnityEngine.Events;
+
 public class GameManager : MonoBehaviour
 {
-
     private static GameManager instance;
     public static GameManager Instance { 
         get 
