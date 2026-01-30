@@ -387,10 +387,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4221083cd321ccc41a0c4fabd9e21b05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mask: {fileID: 0}
+  mask: {fileID: 6953236209656939939}
   colorChecker: {fileID: 1127756900488380164}
   delayTime: 0.5
-  acceptableColorDifference: 90
-  onFoundPlayer:
-    m_PersistentCalls:
-      m_Calls: []
+  acceptableColorDifference: 95
