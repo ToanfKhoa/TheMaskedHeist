@@ -17,6 +17,11 @@ public class Diamond : MonoBehaviour
             {
                 player.HoldDiamond(this.gameObject);
             }
+
+            if (GameManager.Instance != null)
+            {
+                GameManager.Instance.HandleDiamondStolen();
+            }
         }
     }
 }
