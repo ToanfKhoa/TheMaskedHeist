@@ -9,7 +9,7 @@ public class PlayerDetector : MonoBehaviour
     [SerializeField] ColorChecker colorChecker;
     [SerializeField] float delayTime = 0.5f;
     [SerializeField] int acceptableColorDifference = 90;
-    [SerializeField] UnityEvent onFoundPlayer = new();
+    //[SerializeField] UnityEvent onFoundPlayer = new();
 
     private Coroutine checkPlayerColorCoroutine = null;
     private void Start()
@@ -23,7 +23,8 @@ public class PlayerDetector : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         PlayerController detectedPlayer = collision.GetComponent<PlayerController>();
-        if (mask == null || mask.GetComponent<SpriteRenderer>() || detectedPlayer == null) return;
+        Debug.Log(detectedPlayer);
+        if (mask == null || mask.GetComponent<SpriteRenderer>() == null || detectedPlayer == null) return;
         
         if (checkPlayerColorCoroutine == null)
         {
@@ -35,10 +36,15 @@ public class PlayerDetector : MonoBehaviour
         yield return new WaitForSeconds(delayTime);
         if (colorChecker.CompareColorHSV(mask.GetComponent<SpriteRenderer>().color, playerColor) < acceptableColorDifference)
         {
-            if (onFoundPlayer != null)
+            //if (onFoundPlayer != null)
+            //{
+            //    onFoundPlayer.Invoke();
+            //}
+            if (GameManager.Instance != null)
             {
-                onFoundPlayer.Invoke();
+                GameManager.Instance.HandlePlayerFound();
             }
         }
+        checkPlayerColorCoroutine = null;
     }
 }
