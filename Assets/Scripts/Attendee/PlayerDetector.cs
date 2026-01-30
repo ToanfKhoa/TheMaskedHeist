@@ -31,6 +31,14 @@ public class PlayerDetector : MonoBehaviour
             checkPlayerColorCoroutine = StartCoroutine(CheckPlayerColorAfterDelay(detectedPlayer.GetMaskColor()));
         }
     }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (checkPlayerColorCoroutine != null)
+        {
+            StopCoroutine(checkPlayerColorCoroutine);
+            checkPlayerColorCoroutine = null;
+        }
+    }
     IEnumerator CheckPlayerColorAfterDelay(Color playerColor)
     {
         yield return new WaitForSeconds(delayTime);
