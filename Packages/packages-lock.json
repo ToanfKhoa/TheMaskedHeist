@@ -110,6 +110,16 @@
         "com.unity.modules.jsonserialize": "1.0.0"
       }
     },
+    "com.unity.test-framework.performance": {
+      "version": "3.1.0",
+      "depth": 2,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.test-framework": "1.1.33",
+        "com.unity.modules.jsonserialize": "1.0.0"
+      },
+      "url": "https://packages.unity.com"
+    },
     "com.unity.timeline": {
       "version": "1.8.10",
       "depth": 0,
@@ -119,15 +129,6 @@
         "com.unity.modules.director": "1.0.0",
         "com.unity.modules.animation": "1.0.0",
         "com.unity.modules.particlesystem": "1.0.0"
-      }
-    },
-    "com.unity.test-framework.performance": {
-      "version": "3.1.0",
-      "depth": 2,
-      "source": "registry",
-      "dependencies": {
-        "com.unity.test-framework": "1.1.33",
-        "com.unity.modules.jsonserialize": "1.0.0"
       },
       "url": "https://packages.unity.com"
     },
