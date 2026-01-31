@@ -35,6 +35,7 @@ public class Obsticle : MonoBehaviour
         flyDirection = new Vector3(direction, 1f, 0f).normalized;
 
         isLaunched = true;
+        GetComponent<Collider2D>().enabled = false;
 
         // Disable after 5 seconds
         Invoke(nameof(DisableSelf), 5f);
