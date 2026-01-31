@@ -311,12 +311,14 @@ MonoBehaviour:
   carStarting: {fileID: 8300000, guid: b227f8c39a896554b9f2b47d58d13420, type: 3}
   fadeDuration: 2
   startMusic: {fileID: 0}
-  partyMusic: {fileID: 8300000, guid: 76a64fb7f4c3f6346bb1854152d34f87, type: 3}
+  partyMusic1: {fileID: 8300000, guid: 76a64fb7f4c3f6346bb1854152d34f87, type: 3}
+  partyMusic2: {fileID: 8300000, guid: f0bb76e1f908fc041a7c45e36d86dc47, type: 3}
+  partyMusic3: {fileID: 8300000, guid: 0d0b1a25f0e45424281c111bb2f61c5a, type: 3}
   chaseMusic: {fileID: 8300000, guid: 09242c2ac25995148a5be808bf7964f4, type: 3}
   winMusic: {fileID: 0}
   player: {fileID: 0}
   attendeeHit: {fileID: 0}
-  attendeeSUsPlayer: {fileID: 8300000, guid: 1d15ba729b5417f46909c9ccc9f95fac, type: 3}
+  attendeeSusPlayer: {fileID: 8300000, guid: 1d15ba729b5417f46909c9ccc9f95fac, type: 3}
   attendeeFoundPlayer: {fileID: 8300000, guid: fa2be0d9652dd6b4eb45eef014ac40d3, type: 3}
-  gameOver: {fileID: 0}
+  gameOver: {fileID: 8300000, guid: 3aca3d2515880474b8860e7539ad0749, type: 3}
   buttonClick: {fileID: 0}

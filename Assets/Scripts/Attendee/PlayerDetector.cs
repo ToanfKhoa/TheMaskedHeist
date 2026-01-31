@@ -64,11 +64,14 @@ public class PlayerDetector : MonoBehaviour
     }
     IEnumerator CaughtPlayerAfterDelay()
     {
+        SoundManager.Instance.PlaySFX(SoundManager.Instance.attendeeSusPlayer, 5f);
+
         yield return new WaitForSeconds(delayTime);
 
         if (GameManager.Instance != null)
         {
             GameManager.Instance.HandlePlayerFound();
+            SoundManager.Instance.PlaySFX(SoundManager.Instance.attendeeFoundPlayer);
         }
         caughtPlayerAfterDelayCoroutine = null;
     }
