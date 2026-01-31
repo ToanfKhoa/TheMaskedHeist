@@ -7,6 +7,7 @@ public class RoomBasedCamera : MonoBehaviour
 
     // The target position the camera is trying to reach
     private Vector3 targetPosition;
+    float yOffset = 2f;
 
     private void Start()
     {
@@ -24,10 +25,11 @@ public class RoomBasedCamera : MonoBehaviour
         }
     }
 
+
     // This function will be called by the Room objects
     public void MoveToNewRoom(Vector3 newRoomPosition)
     {
         // Keep the camera's Z position (usually -10) so we don't clip through the background
-        targetPosition = new Vector3(newRoomPosition.x, newRoomPosition.y, transform.position.z);
+        targetPosition = new Vector3(newRoomPosition.x, newRoomPosition.y + yOffset, transform.position.z);
     }
 }
