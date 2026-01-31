@@ -12,6 +12,7 @@ public class ColorChecker : MonoBehaviour
         Color.RGBToHSV(playerColor, out h1, out s1, out v1);
         Color.RGBToHSV(attendeeColor, out h2, out s2, out v2);
 
+        /*
         // Tinh khoang cach Euclidean giua hai mau HSV
         float coichungmaudo = Mathf.Min(Mathf.Abs(h1 - h2), 1 - Mathf.Abs(h1 - h2));
         float distance = Mathf.Sqrt(
@@ -24,6 +25,12 @@ public class ColorChecker : MonoBehaviour
         float colorComparisionValue = 1 - (distance / Mathf.Sqrt(2)); //sqrt(3) do khoang cach toi da cua 2 mau la sqrt(3)
         int score = (int)(colorComparisionValue * 100);
         return score;
+        */
+        float diff = Mathf.Abs(h1 - h2);
+        float hueDistance = Mathf.Min(diff, 1f - diff);
+        float colorComparisionValue = 1 - (hueDistance / 0.5f);
+        int score = (int)(colorComparisionValue * 100);
+        return Mathf.Clamp(score, 0, 100);
     }
     public static Color GetColorFromGameObject(GameObject obj)
     {
