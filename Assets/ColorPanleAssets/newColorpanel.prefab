@@ -340,6 +340,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CUIColorPicker
       objectReference: {fileID: 0}
+    - target: {fileID: 154786, guid: b51b1107593c0d94288ccdaa607689ea, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 11454784, guid: b51b1107593c0d94288ccdaa607689ea, type: 3}
       propertyPath: playerObject
       value: 
