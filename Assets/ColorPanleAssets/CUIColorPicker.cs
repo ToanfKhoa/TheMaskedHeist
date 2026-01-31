@@ -164,7 +164,7 @@ public class CUIColorPicker : MonoBehaviour
             GetLocalMouse( satvalGO, out mp );  //lay vi tri cuc bo cua chuot tu satvalgo
             Saturation = mp.x / satvalSz.x;     //lay ti le mp.x va satval.x (chieu ngang) de chuan hoa thanh so tu 0 toi 1
             Value = mp.y / satvalSz.y;          //lay ti le mp.y va huesz.y (chieu doc) de chuan hoa thanh so tu 0 toi 1
-            applySaturationValue(); //cap nhat lai saturation,value
+            //applySaturationValue(); //cap nhat lai saturation,value
             satvalKnob.transform.localPosition = mp; //cap nhat vi tri cua satvalknob
             if ( Input.GetMouseButtonUp( 0 ) ) {    //lay ti le mp.y va huesz.y (chieu doc) de chuan hoa thanh so tu 0 toi 1
                 _update = idle;
