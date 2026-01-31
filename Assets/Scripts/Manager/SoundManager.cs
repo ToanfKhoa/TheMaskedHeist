@@ -10,6 +10,10 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private AudioSource sfxSource;
 
     [Header("Audio Clip")]
+    public AudioClip doorOpening;
+    public AudioClip diamondPickup;
+    public AudioClip carStarting;
+
     [Header("Theme music")]
     public float fadeDuration = 2.0f;
     public AudioClip startMusic;
@@ -23,6 +27,8 @@ public class SoundManager : MonoBehaviour
 
     [Header("Attendee")]
     public AudioClip attendeeHit;
+    public AudioClip attendeeSUsPlayer;
+    public AudioClip attendeeFoundPlayer;
 
     [Header("Event")]
     public AudioClip gameOver;
