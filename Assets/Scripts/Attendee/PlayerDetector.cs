@@ -22,6 +22,8 @@ public class PlayerDetector : MonoBehaviour
     }
     private void OnTriggerStay2D(Collider2D collision)
     {
+         if (collision.GetComponent<PlayerController>() == null) return;
+
         detectedPlayer = collision.GetComponent<PlayerController>();
 
         if (mask == null || mask.GetComponent<SpriteRenderer>() == null || detectedPlayer == null) return;
