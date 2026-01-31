@@ -521,6 +521,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 5
   mask: {fileID: 1360490899494622802}
+  animator: {fileID: 3846096603383923273}
   holdPivot: {fileID: 47468281045930699}
 --- !u!1 &6810430880857133949
 GameObject:
