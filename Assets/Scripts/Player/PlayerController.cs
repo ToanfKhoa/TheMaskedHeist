@@ -10,14 +10,14 @@ public class PlayerController : MonoBehaviour
 
     private Vector2 moveInput = Vector2.zero;
     private Rigidbody2D rb;
-    private Animator animator;
+    [SerializeField] Animator animator;
 
     [SerializeField] private Transform holdPivot;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        animator = GetComponent<Animator>();
+        //animator = GetComponent<Animator>();
     }
 
     // -------------------------
