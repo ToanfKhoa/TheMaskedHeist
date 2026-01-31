@@ -6590,8 +6590,12 @@ PrefabInstance:
       value: Room (0)
       objectReference: {fileID: 0}
     - target: {fileID: 8706243467870627317, guid: 96ea031169ddf3d4e89f9dde97b1ba8a, type: 3}
+      propertyPath: cam
+      value: 
+      objectReference: {fileID: 519420033}
+    - target: {fileID: 8706243467870627317, guid: 96ea031169ddf3d4e89f9dde97b1ba8a, type: 3}
       propertyPath: enemiesGroup.Array.size
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8706243467870627317, guid: 96ea031169ddf3d4e89f9dde97b1ba8a, type: 3}
       propertyPath: 'enemiesGroup.Array.data[0]'

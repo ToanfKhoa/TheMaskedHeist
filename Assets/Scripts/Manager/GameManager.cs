@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -42,6 +43,8 @@ public class GameManager : MonoBehaviour
         Debug.Log("Player Found! Game Over.");
         OnPlayerFound.Invoke();
         // Additional game over logic here
+
+        SceneManager.LoadScene("LoseCutScene");
     }
 
     public void HandleDiamondStolen()
@@ -56,5 +59,7 @@ public class GameManager : MonoBehaviour
         Debug.Log("You Win!");
         OnWin.Invoke();
         // Additional win logic here
+
+        SceneManager.LoadScene("WinScene");
     }
 }
