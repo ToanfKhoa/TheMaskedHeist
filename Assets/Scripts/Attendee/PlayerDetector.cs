@@ -9,50 +9,67 @@ public class PlayerDetector : MonoBehaviour
     [SerializeField] ColorChecker colorChecker;
     [SerializeField] float delayTime = 0.5f;
     [SerializeField] int acceptableColorDifference = 90;
+    [SerializeField] GameObject detectedPlayerAnnouncement;
     //[SerializeField] UnityEvent onFoundPlayer = new();
 
-    private Coroutine checkPlayerColorCoroutine = null;
+    PlayerController detectedPlayer = null;
+    private Coroutine caughtPlayerAfterDelayCoroutine = null;
     private void Start()
     {
         colorChecker = GetComponent<ColorChecker>();
-        if (colorChecker == null)
-        {
-            Debug.LogError("Player detector needs color checker component to detect player");
-        }
+        if (colorChecker == null){ Debug.LogError("Player detector needs color checker component to detect player"); }
+        if (detectedPlayerAnnouncement != null) detectedPlayerAnnouncement.SetActive(false);
     }
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
-        PlayerController detectedPlayer = collision.GetComponent<PlayerController>();
-        Debug.Log(detectedPlayer);
+        detectedPlayer = collision.GetComponent<PlayerController>();
+
         if (mask == null || mask.GetComponent<SpriteRenderer>() == null || detectedPlayer == null) return;
-        
-        if (checkPlayerColorCoroutine == null)
+
+        Color playerColor = detectedPlayer.GetMaskColor();
+
+        Debug.Log("Checked color: " + colorChecker.CompareColorHSV(mask.GetComponent<SpriteRenderer>().color, playerColor));
+
+        if (colorChecker.CompareColorHSV(mask.GetComponent<SpriteRenderer>().color, playerColor) < acceptableColorDifference)
         {
-            checkPlayerColorCoroutine = StartCoroutine(CheckPlayerColorAfterDelay(detectedPlayer.GetMaskColor()));
+            if (detectedPlayerAnnouncement != null) detectedPlayerAnnouncement.SetActive(true);
+
+            if (caughtPlayerAfterDelayCoroutine == null)
+            {
+                caughtPlayerAfterDelayCoroutine = StartCoroutine(CaughtPlayerAfterDelay());
+            }
+        }
+        else
+        {
+            if (detectedPlayerAnnouncement != null) detectedPlayerAnnouncement.SetActive(false);
+
+            if (caughtPlayerAfterDelayCoroutine != null)
+            {
+                StopCoroutine(caughtPlayerAfterDelayCoroutine);
+                caughtPlayerAfterDelayCoroutine = null;
+            }
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (checkPlayerColorCoroutine != null)
+        if (detectedPlayer != collision.GetComponent<PlayerController>()) return;
+
+        if (detectedPlayerAnnouncement != null) detectedPlayerAnnouncement.SetActive(false);
+
+        if (caughtPlayerAfterDelayCoroutine != null)
         {
-            StopCoroutine(checkPlayerColorCoroutine);
-            checkPlayerColorCoroutine = null;
+            StopCoroutine(caughtPlayerAfterDelayCoroutine);
+            caughtPlayerAfterDelayCoroutine = null;
         }
     }
-    IEnumerator CheckPlayerColorAfterDelay(Color playerColor)
+    IEnumerator CaughtPlayerAfterDelay()
     {
         yield return new WaitForSeconds(delayTime);
-        if (colorChecker.CompareColorHSV(mask.GetComponent<SpriteRenderer>().color, playerColor) < acceptableColorDifference)
+
+        if (GameManager.Instance != null)
         {
-            //if (onFoundPlayer != null)
-            //{
-            //    onFoundPlayer.Invoke();
-            //}
-            if (GameManager.Instance != null)
-            {
-                GameManager.Instance.HandlePlayerFound();
-            }
+            GameManager.Instance.HandlePlayerFound();
         }
-        checkPlayerColorCoroutine = null;
+        caughtPlayerAfterDelayCoroutine = null;
     }
 }
