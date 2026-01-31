@@ -270,7 +270,7 @@ GameObject:
   m_Component:
   - component: {fileID: 186030188}
   - component: {fileID: 186030187}
-  - component: {fileID: 186030186}
+  - component: {fileID: 186030189}
   m_Layer: 0
   m_Name: Door (Linked)
   m_TagString: Untagged
@@ -278,20 +278,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &186030186
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 186030185}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f0ecfab7d3e58104d92bf81ccdfe6cd5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  destinationPoint: {fileID: 1415318565}
-  updateCamera: 0
 --- !u!61 &186030187
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -354,6 +340,20 @@ Transform:
   - {fileID: 790931609}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &186030189
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 186030185}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0ecfab7d3e58104d92bf81ccdfe6cd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  destinationPoint: {fileID: 1415318565}
+  updateCamera: 1
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -593,11 +593,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5504073581910038114, guid: 4c1575d33a4724d4b830731859b39a8a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 6.1
+      value: -3.19
       objectReference: {fileID: 0}
     - target: {fileID: 5504073581910038114, guid: 4c1575d33a4724d4b830731859b39a8a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.3
+      value: 0.83
       objectReference: {fileID: 0}
     - target: {fileID: 5504073581910038114, guid: 4c1575d33a4724d4b830731859b39a8a, type: 3}
       propertyPath: m_LocalPosition.z
@@ -631,6 +631,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5519348722748463701, guid: 4c1575d33a4724d4b830731859b39a8a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.14
+      objectReference: {fileID: 0}
     - target: {fileID: 8852669554285407699, guid: 4c1575d33a4724d4b830731859b39a8a, type: 3}
       propertyPath: m_Name
       value: Attendee
@@ -649,12 +653,20 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1542709365338469515, guid: 6d206547c6685fb4fb39a2a980076183, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1542709365338469515, guid: 6d206547c6685fb4fb39a2a980076183, type: 3}
       propertyPath: destinationPoint
       value: 
       objectReference: {fileID: 186030188}
     - target: {fileID: 3527177314983961299, guid: 6d206547c6685fb4fb39a2a980076183, type: 3}
       propertyPath: m_Name
       value: Door
+      objectReference: {fileID: 0}
+    - target: {fileID: 3527177314983961299, guid: 6d206547c6685fb4fb39a2a980076183, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6189895981991386148, guid: 6d206547c6685fb4fb39a2a980076183, type: 3}
       propertyPath: m_LocalPosition.x
