@@ -22,6 +22,7 @@ public class TeleportDoor : MonoBehaviour
             if (targetDoor != null)
             {
                 targetDoor.SetJustArrived(true);
+                Debug.Log("setjustarrivedtrue");
             }
 
             // 4. Teleport the Player
@@ -42,6 +43,7 @@ public class TeleportDoor : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             justArrived = false;
+            Debug.Log("exit");
         }
     }
 
