@@ -28,8 +28,6 @@ public class PlayerDetector : MonoBehaviour
 
         Color playerColor = detectedPlayer.GetMaskColor();
 
-        Debug.Log("Checked color: " + colorChecker.CompareColorHSV(mask.GetComponent<SpriteRenderer>().color, playerColor));
-
         if (colorChecker.CompareColorHSV(mask.GetComponent<SpriteRenderer>().color, playerColor) < acceptableColorDifference)
         {
             if (detectedPlayerAnnouncement != null) detectedPlayerAnnouncement.SetActive(true);
