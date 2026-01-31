@@ -561,6 +561,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   smoothSpeed: 10
+  arrivalThreshold: 0.01
 --- !u!1 &619394800
 GameObject:
   m_ObjectHideFlags: 0
