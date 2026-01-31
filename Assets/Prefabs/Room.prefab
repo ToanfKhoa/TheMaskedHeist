@@ -98,6 +98,7 @@ GameObject:
   - component: {fileID: 1273028122296617386}
   - component: {fileID: 7613009510648676392}
   - component: {fileID: 5021096170806549147}
+  - component: {fileID: 8706243467870627317}
   m_Layer: 0
   m_Name: Room
   m_TagString: Untagged
@@ -182,3 +183,17 @@ MonoBehaviour:
   insetX: 1
   insetTop: 1
   insetBottom: 0
+--- !u!114 &8706243467870627317
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5122433573560591930}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd1b5b0015f929145a8d8ae76d81c540, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cam: {fileID: 0}
+  enemiesGroup: []
