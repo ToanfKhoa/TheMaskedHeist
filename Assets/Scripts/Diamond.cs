@@ -7,7 +7,7 @@ public class Diamond : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             // Notify GameManager that the player has found the diamond
-            GameManager.Instance.HandlePlayerFound();
+            //GameManager.Instance.HandlePlayerFound();
 
             Debug.Log("Diamond collected by player.");
 

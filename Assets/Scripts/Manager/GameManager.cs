@@ -60,7 +60,7 @@ public class GameManager : MonoBehaviour
         Debug.Log("You Win!");
         OnWin.Invoke();
         // Additional win logic here
-
+        SoundManager.Instance.PlayMusic(SoundManager.Instance.winMusic);
         SceneManager.LoadScene("WinScene");
     }
 }
