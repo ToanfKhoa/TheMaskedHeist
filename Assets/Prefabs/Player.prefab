@@ -301,7 +301,7 @@ GameObject:
   - component: {fileID: 2723701172166160036}
   - component: {fileID: 7159891230452069268}
   - component: {fileID: 4550571357107628558}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -519,7 +519,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc37d1882e274674e949ded963ea69ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 5
+  moveSpeed: 2
   mask: {fileID: 1360490899494622802}
   animator: {fileID: 3846096603383923273}
   holdPivot: {fileID: 47468281045930699}

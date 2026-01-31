@@ -653,5 +653,5 @@ MonoBehaviour:
   mask: {fileID: 6953236209656939939}
   colorChecker: {fileID: 1127756900488380164}
   delayTime: 1
-  acceptableColorDifference: 95
+  acceptableColorDifference: 98
   detectedPlayerAnnouncement: {fileID: 4170493855206189696}
