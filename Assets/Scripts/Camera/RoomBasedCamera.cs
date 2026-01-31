@@ -1,33 +1,57 @@
 using UnityEngine;
+using System; // Required for Action
 
 public class RoomBasedCamera : MonoBehaviour
 {
     [Header("Settings")]
-    public float smoothSpeed = 5f; // How fast the camera pans
+    public float smoothSpeed = 5f;
+    public float arrivalThreshold = 0.01f; // Distance at which we consider "arrived"
 
-    // The target position the camera is trying to reach
+    // Actions (Signals)
+    public Action OnTransitionStarted;
+    public Action OnTransitionReached;
+
     private Vector3 targetPosition;
+
+    float yOffset = 2f;
+    private bool isTransitioning = false;
+
 
     private void Start()
     {
-        // Start at the current camera position
         targetPosition = transform.position;
     }
 
     private void LateUpdate()
     {
-        // If the camera is not at the target, move towards it smoothly
-        if (transform.position != targetPosition)
+        if (isTransitioning)
         {
-            Vector3 newPos = Vector3.Lerp(transform.position, targetPosition, smoothSpeed * Time.deltaTime);
-            transform.position = newPos;
+            // Move the camera
+            transform.position = Vector3.Lerp(transform.position, targetPosition, smoothSpeed * Time.deltaTime);
+
+            // Check if we are close enough to the target
+            if (Vector3.Distance(transform.position, targetPosition) < arrivalThreshold)
+            {
+                transform.position = targetPosition; // Snap to exact position
+                isTransitioning = false;
+
+                // Fire the "Reached" signal
+                OnTransitionReached?.Invoke();
+            }
         }
     }
 
-    // This function will be called by the Room objects
     public void MoveToNewRoom(Vector3 newRoomPosition)
     {
-        // Keep the camera's Z position (usually -10) so we don't clip through the background
         targetPosition = new Vector3(newRoomPosition.x, newRoomPosition.y, transform.position.z);
+
+        // Only trigger the start signal if we aren't already at that position
+        if (transform.position != targetPosition)
+        {
+            isTransitioning = true;
+
+            // Fire the "Started" signal
+            OnTransitionStarted?.Invoke();
+        }
     }
 }

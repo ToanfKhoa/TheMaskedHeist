@@ -34,7 +34,6 @@ public class AttendeeMovement : MonoBehaviour
             wanderingTarget = targetZone.GetRelativeRandomPoint();
             wanderingTimer = Random.Range(wanderingInterval.x, wanderingInterval.y);
         }
-        Debug.Log("Relative: " + wanderingTarget);
         Vector2 direction = (wanderingTarget + (Vector2)targetZone.transform.position - (Vector2)transform.position).normalized;
         if ((wanderingTarget + (Vector2)targetZone.transform.position - (Vector2)transform.position).magnitude < minDistanceToTarget)
         {

@@ -5,24 +5,35 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     [Header("Movement Settings")]
-    [SerializeField] private float moveSpeed = 5f;
+    [SerializeField] private float walkSpeed = 5f;
+    [SerializeField] private float runSpeed = 8f;
     [SerializeField] GameObject mask;
+    private float moveSpeed;
 
     private Vector2 moveInput = Vector2.zero;
     private Rigidbody2D rb;
-    private Animator animator;
+    [SerializeField] Animator animator;
 
     [SerializeField] private Transform holdPivot;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        animator = GetComponent<Animator>();
+        moveSpeed = walkSpeed;
+        //animator = GetComponent<Animator>();
     }
 
     // -------------------------
     // INPUT
     // -------------------------
+
+    private void Start()
+    {
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.OnDiamondStolen.AddListener(SpeedUp);
+        }
+    }
     public void OnMove(InputAction.CallbackContext context)
     {
         moveInput = context.ReadValue<Vector2>();
@@ -87,5 +98,10 @@ public class PlayerController : MonoBehaviour
             diamond.transform.SetParent(holdPivot);
             diamond.transform.localPosition = Vector3.zero;
         }
+    }
+
+    private void SpeedUp()
+    {
+        moveSpeed = runSpeed;
     }
 }

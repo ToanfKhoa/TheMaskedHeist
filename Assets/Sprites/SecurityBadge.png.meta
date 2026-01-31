@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: e80832412c9442245ac9f88237191f44
+guid: bd049cda71bf54b49a668b524fd048ac
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -4584430019457290755
-    second: Black and White Simple Creative Quote Typography Newspaper Poster_0
+      213: 125555208602578037
+    second: SecurityBadge_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -46,11 +46,11 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
-  alignment: 9
-  spritePivot: {x: 0.5, y: 0.25}
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
@@ -109,40 +109,27 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Black and White Simple Creative Quote Typography Newspaper Poster_0
+      name: SecurityBadge_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 131
-        height: 108
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        width: 72
+        height: 72
+      alignment: 9
+      pivot: {x: 0.3, y: 0.7}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: dfd6c98cf25d060c0800000000000000
-      internalID: -4584430019457290755
+      spriteID: 57ce4780ccf0eb100800000000000000
+      internalID: 125555208602578037
       vertices: []
       indices: 
       edges: []
@@ -151,8 +138,8 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
-    internalID: 1537655665
+    spriteID: af985fbd4d0c8da409afa802ef2c0a8a
+    internalID: 0
     vertices: []
     indices: 
     edges: []
@@ -161,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Black and White Simple Creative Quote Typography Newspaper Poster_0: -4584430019457290755
+      SecurityBadge_0: 125555208602578037
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
