@@ -22,6 +22,12 @@ public class Diamond : MonoBehaviour
             {
                 GameManager.Instance.HandleDiamondStolen();
             }
+
+            if (SoundManager.Instance != null)
+            {
+                SoundManager.Instance.PlaySFX(SoundManager.Instance.diamondPickup);
+                SoundManager.Instance.PlayMusic(SoundManager.Instance.chaseMusic);
+            }
         }
     }
 }
