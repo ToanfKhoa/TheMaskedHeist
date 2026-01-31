@@ -13,6 +13,7 @@ public class SoundManager : MonoBehaviour
     public AudioClip doorOpening;
     public AudioClip diamondPickup;
     public AudioClip carStarting;
+    public AudioClip kickObstacle;
 
     [Header("Theme music")]
     public float fadeDuration = 2.0f;

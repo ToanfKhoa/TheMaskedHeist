@@ -30,13 +30,12 @@ public class Security : MonoBehaviour
             }
         }
 
-        if (collision.CompareTag("Obsticle"))
+        Obsticle obsticle = collision.GetComponent<Obsticle>();
+        if (obsticle != null)
         {
-            Obsticle obsticle = collision.GetComponent<Obsticle>();
-            if (obsticle != null)
-            {
-                obsticle.LaunchAndSpin((int)transform.localScale.x);
-            }
+            obsticle.LaunchAndSpin((int)transform.localScale.x);
+            SoundManager.Instance.PlaySFX(SoundManager.Instance.kickObstacle);
+            Debug.Log("Security hit an obsticle");
         }
     }
 }
