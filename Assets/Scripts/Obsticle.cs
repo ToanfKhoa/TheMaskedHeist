@@ -3,6 +3,7 @@ using UnityEngine;
 public class Obsticle : MonoBehaviour
 {
     [Header("Settings")]
+    [SerializeField] private float disableAfterSeconds = 5f;
     [SerializeField] private float moveSpeed = 10f;
     [SerializeField] private float spinSpeed = 360f; // Degrees per second
 
@@ -38,7 +39,7 @@ public class Obsticle : MonoBehaviour
         GetComponent<Collider2D>().enabled = false;
 
         // Disable after 5 seconds
-        Invoke(nameof(DisableSelf), 5f);
+        Invoke(nameof(DisableSelf), disableAfterSeconds);
     }
 
     private void DisableSelf()

@@ -36,6 +36,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         OnGameStart.Invoke();
+        SoundManager.Instance.PlayMusic(SoundManager.Instance.partyMusic1);
     }
 
     public void HandlePlayerFound()
