@@ -309,6 +309,7 @@ MonoBehaviour:
   doorOpening: {fileID: 8300000, guid: 7d385e8f19296e840a4a43562461c888, type: 3}
   diamondPickup: {fileID: 8300000, guid: 353720c3b14d6154fa9331ad3f14d8b7, type: 3}
   carStarting: {fileID: 8300000, guid: b227f8c39a896554b9f2b47d58d13420, type: 3}
+  kickObstacle: {fileID: 8300000, guid: cd3f7910a73aad141a12d56907fd5b06, type: 3}
   fadeDuration: 2
   startMusic: {fileID: 0}
   partyMusic1: {fileID: 8300000, guid: 76a64fb7f4c3f6346bb1854152d34f87, type: 3}
