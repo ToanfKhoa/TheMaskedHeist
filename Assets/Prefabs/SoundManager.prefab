@@ -316,7 +316,7 @@ MonoBehaviour:
   partyMusic2: {fileID: 8300000, guid: f0bb76e1f908fc041a7c45e36d86dc47, type: 3}
   partyMusic3: {fileID: 8300000, guid: 0d0b1a25f0e45424281c111bb2f61c5a, type: 3}
   chaseMusic: {fileID: 8300000, guid: 09242c2ac25995148a5be808bf7964f4, type: 3}
-  winMusic: {fileID: 0}
+  winMusic: {fileID: 8300000, guid: c8cb44bced66e4d468d75ba90d9f1507, type: 3}
   player: {fileID: 0}
   attendeeHit: {fileID: 0}
   attendeeSusPlayer: {fileID: 8300000, guid: 1d15ba729b5417f46909c9ccc9f95fac, type: 3}
