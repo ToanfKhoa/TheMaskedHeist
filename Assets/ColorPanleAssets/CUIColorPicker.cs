@@ -5,6 +5,9 @@ using UnityEngine.UI;
 public class CUIColorPicker : MonoBehaviour
 {
     public GameObject playerObject;
+    public GameObject filter;
+    public GameObject[] passwords;
+
     public Color Color { get { return _color; } set { Setup( value ); } } 
     public void SetOnValueChangeCallback( Action<Color> onValueChange )
     {
@@ -16,7 +19,12 @@ public class CUIColorPicker : MonoBehaviour
     //co the thay doi phuong thuc tro toi khi can thiet ma khong can thay doi ma goi
     //co the dung toan tu += de ket hop nhieu phuong thuc trong mot action
     private Action<Color> _onValueChange;
-    private Action _update;     
+    private Action _update;
+
+    public void Start()
+    {
+        passwords = GameObject.FindGameObjectsWithTag( "Password" );
+    }
 
     private static void RGBToHSV( Color color, out float h, out float s, out float v ) //cho biet cac thong so HSV cua mau sac dua vao
     {
@@ -118,8 +126,26 @@ public class CUIColorPicker : MonoBehaviour
             var c2 = isv.x * sv.y * satvalColors[2];    //bao hoa thap, sang cao
             var c3 = sv.x * sv.y * satvalColors[3];     //bao hoa cao, sang cao
             var resultColor = c0 + c1 + c2 + c3;    //tinh tong
+
             var resImg = result.GetComponent<SpriteRenderer>(); //lay image cua result-doi tuong dai dien cho noi hien thi mau sac
-            resImg.color = resultColor;     //doi mau cho image
+            if(resImg != null)
+                resImg.color = resultColor;     //doi mau cho image
+
+            //doi mau cho cac nen cua password
+            foreach (var p in passwords)
+            {
+                var pImg = p.GetComponent<SpriteRenderer>(); //lay image cua tung password
+                if(pImg != null)
+                    pImg.color = resultColor; //doi mau cho tung password
+            }
+
+            // doi mau filter
+            var resImgFilter = filter.GetComponent<SpriteRenderer>();
+            Color newColor = resultColor;
+            newColor.a = 0.2f;
+            if(resImgFilter != null)
+                resImgFilter.color = newColor;
+
             if ( _color != resultColor ) {  //neu mau co thay doi, kich hoat callback
                 if ( _onValueChange != null ) {
                     _onValueChange( resultColor );

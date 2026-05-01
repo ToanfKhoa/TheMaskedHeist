@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Obsticle
   - Security
+  - Password
   layers:
   - Default
   - TransparentFX
