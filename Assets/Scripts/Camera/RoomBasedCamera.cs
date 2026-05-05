@@ -13,7 +13,7 @@ public class RoomBasedCamera : MonoBehaviour
 
     private Vector3 targetPosition;
 
-    float yOffset = 2f;
+    // float yOffset = 2f;
     private bool isTransitioning = false;
 
 
