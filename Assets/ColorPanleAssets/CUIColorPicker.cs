@@ -42,6 +42,8 @@ public class CUIColorPicker : MonoBehaviour
                 Debug.Log("Bạn đang chạm trúng: " + result.gameObject.name);
             }
         }
+
+        _update();
     }
     /// <summary>Bật / tắt chế độ đen trắng từ bên ngoài (ví dụ: nút Toggle).</summary>
     public void SetGrayscaleMode(bool enabled)
@@ -241,5 +243,4 @@ public class CUIColorPicker : MonoBehaviour
     }
 
     void Awake() => Color = Color.green;
-    void Update() => _update();
 }
