@@ -25,6 +25,7 @@ public class CUIColorPicker : MonoBehaviour
         Cipher
     }
     private MaskMode currentMode = MaskMode.Normal;
+    private readonly List<int> _unlockedModes = new List<int> { 0 }; // thứ tự unlock quyết định thứ tự cycle
 
     public void SetOnValueChangeCallback(Action<Color> onValueChange)
     {
@@ -93,9 +94,27 @@ public class CUIColorPicker : MonoBehaviour
                 Debug.Log("Bạn đang chạm trúng: " + result.gameObject.name);
             }
         }
+        HandleModeSwitch();
         _update();
     }
-    /// <summary>Bật / tắt chế độ đen trắng từ bên ngoài (ví dụ: nút Toggle).</summary>
+
+    private void HandleModeSwitch()
+    {
+        if (_unlockedModes.Count <= 1) return;
+
+        int idx = _unlockedModes.IndexOf((int)currentMode);
+        if (Input.GetKeyDown(KeyCode.E))
+            SetMaskMode(_unlockedModes[(idx + 1) % _unlockedModes.Count]);
+        else if (Input.GetKeyDown(KeyCode.Q))
+            SetMaskMode(_unlockedModes[(idx - 1 + _unlockedModes.Count) % _unlockedModes.Count]);
+    }
+
+    public void UnlockMode(int modeIndex)
+    {
+        if (modeIndex >= 0 && modeIndex < 3 && !_unlockedModes.Contains(modeIndex))
+            _unlockedModes.Add(modeIndex);
+    }
+
     public void SetMaskMode(int i)
     {
         switch (i)
