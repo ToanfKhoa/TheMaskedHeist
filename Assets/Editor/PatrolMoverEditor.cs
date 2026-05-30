@@ -1,33 +1,33 @@
 using UnityEngine;
 using UnityEditor;
 
-[CustomEditor(typeof(DarkRoom))]
-public class DarkRoomEditor : Editor
+[CustomEditor(typeof(PatrolMover))]
+public class PatrolMoverEditor : Editor
 {
     void OnSceneGUI()
     {
-        DarkRoom room = (DarkRoom)target;
+        PatrolMover mover = (PatrolMover)target;
         serializedObject.Update();
 
-        SerializedProperty pathProp = serializedObject.FindProperty("localPath");
-        if (pathProp == null || pathProp.arraySize < 2)
+        SerializedProperty waypointsProp = serializedObject.FindProperty("waypoints");
+        if (waypointsProp == null || waypointsProp.arraySize < 2)
         {
             serializedObject.ApplyModifiedProperties();
             return;
         }
 
-        Transform t = room.transform;
+        Transform t = mover.transform;
 
-        for (int i = 0; i < pathProp.arraySize; i++)
+        for (int i = 0; i < waypointsProp.arraySize; i++)
         {
-            SerializedProperty elem = pathProp.GetArrayElementAtIndex(i);
+            SerializedProperty elem = waypointsProp.GetArrayElementAtIndex(i);
             Vector3 world = t.TransformPoint(elem.vector3Value);
 
             EditorGUI.BeginChangeCheck();
             world = Handles.PositionHandle(world, Quaternion.identity);
             if (EditorGUI.EndChangeCheck())
             {
-                Undo.RecordObject(room, "Move Dark Room Waypoint");
+                Undo.RecordObject(mover, "Move Waypoint");
                 Vector3 local = t.InverseTransformPoint(world);
                 local.z = 0f;
                 elem.vector3Value = local;
@@ -36,10 +36,10 @@ public class DarkRoomEditor : Editor
         }
 
         Handles.color = new Color(0f, 1f, 1f, 0.85f);
-        for (int i = 0; i < pathProp.arraySize; i++)
+        for (int i = 0; i < waypointsProp.arraySize; i++)
         {
-            Vector3 a = t.TransformPoint(pathProp.GetArrayElementAtIndex(i).vector3Value);
-            Vector3 b = t.TransformPoint(pathProp.GetArrayElementAtIndex((i + 1) % pathProp.arraySize).vector3Value);
+            Vector3 a = t.TransformPoint(waypointsProp.GetArrayElementAtIndex(i).vector3Value);
+            Vector3 b = t.TransformPoint(waypointsProp.GetArrayElementAtIndex((i + 1) % waypointsProp.arraySize).vector3Value);
             Handles.DrawAAPolyLine(3f, a, b);
         }
 
