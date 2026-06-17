@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
@@ -24,6 +25,13 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private Vector2 checkpointPosition;
+    private bool hasCheckpoint = false;
+    private Vector2 initialPlayerPosition;
+    private Camera gameplayCamera;
+    private bool isLoseCutSceneLoading = false;
+    public bool IsGameOver => isLoseCutSceneLoading;
+
     private void Awake()
     {
         if (instance != null && instance != this)
@@ -35,17 +43,82 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        gameplayCamera = Camera.main;
+
+        GameObject player = GameObject.FindWithTag("Player");
+        if (player != null)
+            initialPlayerPosition = player.transform.position;
+
         OnGameStart.Invoke();
         SoundManager.Instance.PlayMusic(SoundManager.Instance.partyMusic1);
     }
 
+    public void SetCheckpoint(Vector2 position)
+    {
+        checkpointPosition = position;
+        hasCheckpoint = true;
+    }
+
     public void HandlePlayerFound()
     {
-        Debug.Log("Player Found! Game Over.");
-        OnPlayerFound.Invoke();
-        // Additional game over logic here
+        if (isLoseCutSceneLoading) return;
 
-        SceneManager.LoadScene("LoseCutScene");
+        Debug.Log("Player Found! Game Over.");
+        isLoseCutSceneLoading = true;
+
+        GameObject player = GameObject.FindWithTag("Player");
+        if (player != null)
+        {
+            player.GetComponent<PlayerController>().enabled = false;
+            var rb = player.GetComponent<Rigidbody2D>();
+            if (rb != null) rb.linearVelocity = Vector2.zero;
+        }
+
+        OnPlayerFound.Invoke();
+        StartCoroutine(LoadLoseCutSceneAdditive());
+    }
+
+    private IEnumerator LoadLoseCutSceneAdditive()
+    {
+        yield return SceneManager.LoadSceneAsync("LoseCutScene", LoadSceneMode.Additive);
+
+        Scene cutscene = SceneManager.GetSceneByName("LoseCutScene");
+        foreach (GameObject go in cutscene.GetRootGameObjects())
+        {
+            Camera cam = go.GetComponentInChildren<Camera>();
+            if (cam != null)
+            {
+                cam.depth = gameplayCamera != null ? gameplayCamera.depth + 1 : 1;
+                break;
+            }
+        }
+
+        if (gameplayCamera != null)
+            gameplayCamera.gameObject.SetActive(false);
+    }
+
+    public void RespawnPlayer()
+    {
+        Vector2 spawnPosition = hasCheckpoint ? checkpointPosition : initialPlayerPosition;
+
+        StartCoroutine(UnloadLoseCutScene(spawnPosition));
+    }
+
+    private IEnumerator UnloadLoseCutScene(Vector2 spawnPosition)
+    {
+        if (gameplayCamera != null)
+            gameplayCamera.gameObject.SetActive(true);
+
+        yield return SceneManager.UnloadSceneAsync("LoseCutScene");
+
+        GameObject player = GameObject.FindWithTag("Player");
+        if (player != null)
+        {
+            player.transform.position = spawnPosition;
+            player.GetComponent<PlayerController>().enabled = true;
+        }
+
+        isLoseCutSceneLoading = false;
     }
 
     public void HandleDiamondStolen()
