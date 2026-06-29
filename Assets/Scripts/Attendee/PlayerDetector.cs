@@ -34,7 +34,7 @@ public class PlayerDetector : MonoBehaviour
         {
             if (detectedPlayerAnnouncement != null) detectedPlayerAnnouncement.SetActive(true);
 
-            if (caughtPlayerAfterDelayCoroutine == null)
+            if (caughtPlayerAfterDelayCoroutine == null && (GameManager.Instance == null || !GameManager.Instance.IsGameOver))
             {
                 caughtPlayerAfterDelayCoroutine = StartCoroutine(CaughtPlayerAfterDelay());
             }

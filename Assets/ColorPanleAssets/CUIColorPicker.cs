@@ -22,10 +22,12 @@ public class CUIColorPicker : MonoBehaviour
     {
         Normal,
         Grayscale,
-        Cipher
+        Cipher,
+        TrapMask
     }
     private MaskMode currentMode = MaskMode.Normal;
     private readonly List<int> _unlockedModes = new List<int> { 0 }; // thứ tự unlock quyết định thứ tự cycle
+    private GameObject[] _trapObjects;
 
     public void SetOnValueChangeCallback(Action<Color> onValueChange)
     {
@@ -42,6 +44,8 @@ public class CUIColorPicker : MonoBehaviour
     public void Start()
     {
         passwords = GameObject.FindGameObjectsWithTag("Password");
+        _trapObjects = GameObject.FindGameObjectsWithTag("Trap");
+        SetTrapSpritesVisible(false);
     }
 
     private static bool GetLocalMouse(GameObject go, out Vector2 result) //kiem tra tro chuot co trong object ko, tra ve vi tri cuc bo
@@ -111,25 +115,44 @@ public class CUIColorPicker : MonoBehaviour
 
     public void UnlockMode(int modeIndex)
     {
-        if (modeIndex >= 0 && modeIndex < 3 && !_unlockedModes.Contains(modeIndex))
+        if (modeIndex >= 0 && modeIndex < 4 && !_unlockedModes.Contains(modeIndex))
             _unlockedModes.Add(modeIndex);
     }
 
     public void SetMaskMode(int i)
     {
+        bool wasTrapMask = currentMode == MaskMode.TrapMask;
+
         switch (i)
         {
             case 0: currentMode = MaskMode.Normal; break;
             case 1: currentMode = MaskMode.Grayscale; break;
             case 2: currentMode = MaskMode.Cipher; break;
+            case 3: currentMode = MaskMode.TrapMask; break;
         }
 
-        if (currentMode == MaskMode.Cipher)
+        if (currentMode == MaskMode.TrapMask)
+        {
             filter.SetActive(true);
+            filter.GetComponent<SpriteRenderer>().color = new Color(0.3f, 0.3f, 0.3f, 0.7f);
+            SetTrapSpritesVisible(true);
+        }
         else
-            filter.SetActive(false);
+        {
+            if (wasTrapMask) SetTrapSpritesVisible(false);
+            filter.SetActive(currentMode == MaskMode.Cipher);
+        }
 
-        Setup(_color);          // vẽ lại UI theo chế độ mới
+        Setup(_color);
+    }
+
+    private void SetTrapSpritesVisible(bool visible)
+    {
+        foreach (var trap in _trapObjects)
+        {
+            var sr = trap.GetComponent<SpriteRenderer>();
+            if (sr != null) sr.enabled = visible;
+        }
     }
 
     // ── Trạng thái nội bộ ───────────────────────────────────

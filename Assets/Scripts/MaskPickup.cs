@@ -11,6 +11,9 @@ public class MaskPickup : MonoBehaviour
     {
         if (!collision.CompareTag("Player")) return;
 
+        if (GameManager.Instance != null)
+            GameManager.Instance.SetCheckpoint(collision.transform.position);
+
         colorPicker.UnlockMode(modeToUnlock);
         gameObject.SetActive(false);
     }
