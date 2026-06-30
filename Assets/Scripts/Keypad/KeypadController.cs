@@ -17,7 +17,9 @@ public class KeypadController : MonoBehaviour
     [Header("Events")]
     public UnityEvent OnAccessGranted; 
     public UnityEvent OnAccessDenied;  
-    public UnityEvent OnGameOver;    
+    public UnityEvent OnGameOver;
+
+    [SerializeField] private InteractiveObstacle linkedObstacle;
 
     private string _currentInput = "";
     private int _attemptsCount = 0;
@@ -63,6 +65,9 @@ public class KeypadController : MonoBehaviour
         _isLocked = true;
         statusText.text = "ACCESS GRANTED";
         statusText.color = Color.green;
+
+        linkedObstacle.Open();
+
         OnAccessGranted?.Invoke();
     }
 
