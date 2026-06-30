@@ -29,6 +29,11 @@ public class CUIColorPicker : MonoBehaviour
     private readonly List<int> _unlockedModes = new List<int> { 0 }; // thứ tự unlock quyết định thứ tự cycle
     private GameObject[] _trapObjects;
 
+    // ── Nút đổi mode trên UI (vd. nút GRAY) + sprite mặt nạ tương ứng ──
+    [Header("Mode Button UI")]
+    [SerializeField] private Image modeButtonIcon; // Image của nút bấm, sẽ đổi sprite theo mode
+    [SerializeField] private Sprite[] modeSprites = new Sprite[4]; // theo thứ tự enum MaskMode: Normal, Grayscale, Cipher, TrapMask
+
     public void SetOnValueChangeCallback(Action<Color> onValueChange)
     {
         _onValueChange = onValueChange;
@@ -104,13 +109,25 @@ public class CUIColorPicker : MonoBehaviour
 
     private void HandleModeSwitch()
     {
+        if (Input.GetKeyDown(KeyCode.E))
+            CycleMode(1);
+        else if (Input.GetKeyDown(KeyCode.Q))
+            CycleMode(-1);
+    }
+
+    /// <summary>Chuyển sang mode kế tiếp/trước trong danh sách đã unlock.</summary>
+    private void CycleMode(int direction)
+    {
         if (_unlockedModes.Count <= 1) return;
 
         int idx = _unlockedModes.IndexOf((int)currentMode);
-        if (Input.GetKeyDown(KeyCode.E))
-            SetMaskMode(_unlockedModes[(idx + 1) % _unlockedModes.Count]);
-        else if (Input.GetKeyDown(KeyCode.Q))
-            SetMaskMode(_unlockedModes[(idx - 1 + _unlockedModes.Count) % _unlockedModes.Count]);
+        SetMaskMode(_unlockedModes[(idx + direction + _unlockedModes.Count) % _unlockedModes.Count]);
+    }
+
+    /// <summary>Gắn vào OnClick của nút UI (vd. nút GRAY) để cycle mode giống phím E.</summary>
+    public void OnModeButtonClicked()
+    {
+        CycleMode(1);
     }
 
     public void UnlockMode(int modeIndex)
@@ -143,7 +160,27 @@ public class CUIColorPicker : MonoBehaviour
             filter.SetActive(currentMode == MaskMode.Cipher);
         }
 
+        UpdateModeSprite();
         Setup(_color);
+    }
+
+    /// <summary>Đổi sprite icon trên nút UI và sprite mặt nạ player đang đeo theo mode hiện tại.</summary>
+    private void UpdateModeSprite()
+    {
+        int idx = (int)currentMode;
+        if (modeSprites == null || idx < 0 || idx >= modeSprites.Length) return;
+
+        Sprite sprite = modeSprites[idx];
+        if (sprite == null) return;
+
+        if (modeButtonIcon != null)
+            modeButtonIcon.sprite = sprite;
+
+        if (playerObject != null)
+        {
+            var sr = playerObject.GetComponent<SpriteRenderer>();
+            if (sr != null) sr.sprite = sprite;
+        }
     }
 
     private void SetTrapSpritesVisible(bool visible)
@@ -318,7 +355,11 @@ public class CUIColorPicker : MonoBehaviour
     // ── Cập nhật kết quả ────────────────────────────────────
     private void ApplyResult(Color result)
     {
-        playerObject.GetComponent<SpriteRenderer>().color = result;
+        // Cipher và TrapMask giữ màu gốc sprite, không tô màu theo người chơi
+        if (currentMode == MaskMode.Cipher || currentMode == MaskMode.TrapMask)
+            playerObject.GetComponent<SpriteRenderer>().color = Color.white;
+        else
+            playerObject.GetComponent<SpriteRenderer>().color = result;
 
         if (currentMode == MaskMode.Cipher)
         {
