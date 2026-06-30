@@ -17,13 +17,24 @@ public class CUIColorPicker : MonoBehaviour
     public GameObject filter;
     public GameObject[] passwords;
 
-    public void SetOnValueChangeCallback( Action<Color> onValueChange )
+    // ── Chế độ ──────────────────────────────────────────────
+    public enum MaskMode
+    {
+        Normal,
+        Grayscale,
+        Cipher,
+        TrapMask
+    }
+    private MaskMode currentMode = MaskMode.Normal;
+    private readonly List<int> _unlockedModes = new List<int> { 0 }; // thứ tự unlock quyết định thứ tự cycle
+    private GameObject[] _trapObjects;
+
+    public void SetOnValueChangeCallback(Action<Color> onValueChange)
     {
         _onValueChange = onValueChange;
     }
 
-    // ── Chế độ ──────────────────────────────────────────────
-    private bool _isGrayscaleMode = false;
+
     //action la kieu du lieu co the chua phuong thuc khong co kieu tra ve, co mot hoac nhieu tham so
     //co the thay doi phuong thuc tro toi khi can thiet ma khong can thay doi ma goi
     //co the dung toan tu += de ket hop nhieu phuong thuc trong mot action
@@ -32,36 +43,38 @@ public class CUIColorPicker : MonoBehaviour
 
     public void Start()
     {
-        passwords = GameObject.FindGameObjectsWithTag( "Password" );
+        passwords = GameObject.FindGameObjectsWithTag("Password");
+        _trapObjects = GameObject.FindGameObjectsWithTag("Trap");
+        SetTrapSpritesVisible(false);
     }
 
-    private static bool GetLocalMouse( GameObject go, out Vector2 result ) //kiem tra tro chuot co trong object ko, tra ve vi tri cuc bo
+    private static bool GetLocalMouse(GameObject go, out Vector2 result) //kiem tra tro chuot co trong object ko, tra ve vi tri cuc bo
     {
-        var rt = ( RectTransform )go.transform;
-        var mp = rt.InverseTransformPoint( Input.mousePosition );
-        result.x = Mathf.Clamp( mp.x, rt.rect.min.x, rt.rect.max.x );
-        result.y = Mathf.Clamp( mp.y, rt.rect.min.y, rt.rect.max.y );
-        return rt.rect.Contains( mp );
+        var rt = (RectTransform)go.transform;
+        var mp = rt.InverseTransformPoint(Input.mousePosition);
+        result.x = Mathf.Clamp(mp.x, rt.rect.min.x, rt.rect.max.x);
+        result.y = Mathf.Clamp(mp.y, rt.rect.min.y, rt.rect.max.y);
+        return rt.rect.Contains(mp);
     }
 
-    private static Vector2 GetWidgetSize( GameObject go ) //tra ve kich thuoc cua gameobject
+    private static Vector2 GetWidgetSize(GameObject go) //tra ve kich thuoc cua gameobject
     {
-        var rt = ( RectTransform )go.transform;
+        var rt = (RectTransform)go.transform;
         return rt.rect.size;
     }
 
-    private GameObject GO( string name ) //tim va tra ve mot object con co ten mong muon
+    private GameObject GO(string name) //tim va tra ve mot object con co ten mong muon
     {
-        return transform.Find( name ).gameObject;
+        return transform.Find(name).gameObject;
     }
 
     public Color SetRandomColor() //random mau
     {
         var rng = new System.Random(); //tao so ngau nhien
-        var r = ( rng.Next() % 1000 ) / 1000.0f;    //next de lay mot so ngau nhien tu the hien cua lop random
-        var g = ( rng.Next() % 1000 ) / 1000.0f;
-        var b = ( rng.Next() % 1000 ) / 1000.0f;
-        Color Color = new Color( r, g, b );   //tao mau ngau nhien cho color
+        var r = (rng.Next() % 1000) / 1000.0f;    //next de lay mot so ngau nhien tu the hien cua lop random
+        var g = (rng.Next() % 1000) / 1000.0f;
+        var b = (rng.Next() % 1000) / 1000.0f;
+        Color Color = new Color(r, g, b);   //tao mau ngau nhien cho color
         return Color;
     }
 
@@ -85,17 +98,61 @@ public class CUIColorPicker : MonoBehaviour
                 Debug.Log("Bạn đang chạm trúng: " + result.gameObject.name);
             }
         }
+        HandleModeSwitch();
         _update();
     }
-    /// <summary>Bật / tắt chế độ đen trắng từ bên ngoài (ví dụ: nút Toggle).</summary>
-    public void SetGrayscaleMode()
-    {
-        if(_isGrayscaleMode)
-            _isGrayscaleMode = false;
-        else
-            _isGrayscaleMode = true;
 
-        Setup(_color);          // vẽ lại UI theo chế độ mới
+    private void HandleModeSwitch()
+    {
+        if (_unlockedModes.Count <= 1) return;
+
+        int idx = _unlockedModes.IndexOf((int)currentMode);
+        if (Input.GetKeyDown(KeyCode.E))
+            SetMaskMode(_unlockedModes[(idx + 1) % _unlockedModes.Count]);
+        else if (Input.GetKeyDown(KeyCode.Q))
+            SetMaskMode(_unlockedModes[(idx - 1 + _unlockedModes.Count) % _unlockedModes.Count]);
+    }
+
+    public void UnlockMode(int modeIndex)
+    {
+        if (modeIndex >= 0 && modeIndex < 4 && !_unlockedModes.Contains(modeIndex))
+            _unlockedModes.Add(modeIndex);
+    }
+
+    public void SetMaskMode(int i)
+    {
+        bool wasTrapMask = currentMode == MaskMode.TrapMask;
+
+        switch (i)
+        {
+            case 0: currentMode = MaskMode.Normal; break;
+            case 1: currentMode = MaskMode.Grayscale; break;
+            case 2: currentMode = MaskMode.Cipher; break;
+            case 3: currentMode = MaskMode.TrapMask; break;
+        }
+
+        if (currentMode == MaskMode.TrapMask)
+        {
+            filter.SetActive(true);
+            filter.GetComponent<SpriteRenderer>().color = new Color(0.3f, 0.3f, 0.3f, 0.7f);
+            SetTrapSpritesVisible(true);
+        }
+        else
+        {
+            if (wasTrapMask) SetTrapSpritesVisible(false);
+            filter.SetActive(currentMode == MaskMode.Cipher);
+        }
+
+        Setup(_color);
+    }
+
+    private void SetTrapSpritesVisible(bool visible)
+    {
+        foreach (var trap in _trapObjects)
+        {
+            var sr = trap.GetComponent<SpriteRenderer>();
+            if (sr != null) sr.enabled = visible;
+        }
     }
 
     // ── Trạng thái nội bộ ───────────────────────────────────
@@ -156,7 +213,7 @@ public class CUIColorPicker : MonoBehaviour
         var sliderKnob = GO("Hue/Knob");
         var sliderSz = GetWidgetSize(sliderGO);
 
-        if (_isGrayscaleMode)
+        if (currentMode == MaskMode.Grayscale)
             SetupGrayscale(sliderGO, sliderKnob, sliderSz, inputColor);
         else
             SetupHue(sliderGO, sliderKnob, sliderSz, inputColor);
@@ -263,20 +320,23 @@ public class CUIColorPicker : MonoBehaviour
     {
         playerObject.GetComponent<SpriteRenderer>().color = result;
 
-        //doi mau cho cac nen cua password
-        foreach (var p in passwords)
+        if (currentMode == MaskMode.Cipher)
         {
-            var pImg = p.GetComponent<SpriteRenderer>(); //lay image cua tung password
-            if (pImg != null)
-                pImg.color = result; //doi mau cho tung password
-        }
+            //doi mau cho cac nen cua password
+            foreach (var p in passwords)
+            {
+                var pImg = p.GetComponent<SpriteRenderer>(); //lay image cua tung password
+                if (pImg != null)
+                    pImg.color = result; //doi mau cho tung password
+            }
 
-        // doi mau filter
-        var resImgFilter = filter.GetComponent<SpriteRenderer>();
-        Color newColor = result;
-        newColor.a = 0.2f;
-        if (resImgFilter != null)
-            resImgFilter.color = newColor;
+            // doi mau filter
+            var resImgFilter = filter.GetComponent<SpriteRenderer>();
+            Color newColor = result;
+            newColor.a = 0.2f;
+            if (resImgFilter != null)
+                resImgFilter.color = newColor;
+        }
 
         if (_color != result)
         {
