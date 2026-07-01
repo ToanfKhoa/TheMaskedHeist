@@ -33,7 +33,13 @@ public class PlayerController : MonoBehaviour
         if (GameManager.Instance != null)
         {
             GameManager.Instance.OnDiamondStolen.AddListener(SpeedUp);
+            GameManager.Instance.OnRespawn.AddListener(ResetSpeed);
         }
+    }
+
+    private void ResetSpeed()
+    {
+        moveSpeed = walkSpeed;
     }
     public void OnMove(InputAction.CallbackContext context)
     {

@@ -10,11 +10,13 @@ public class GameManager : MonoBehaviour
     [SerializeField] private UnityEvent onPlayerFound;
     [SerializeField] private UnityEvent onDiamondStolen;
     [SerializeField] private UnityEvent onWin;
+    [SerializeField] private UnityEvent onRespawn = new UnityEvent();
 
     public UnityEvent OnGameStart { get => onGameStart; }
     public UnityEvent OnPlayerFound { get => onPlayerFound; }
     public UnityEvent OnDiamondStolen { get => onDiamondStolen; }
     public UnityEvent OnWin { get => onWin; }
+    public UnityEvent OnRespawn { get => onRespawn; }
 
     private static GameManager instance;
     public static GameManager Instance
@@ -31,6 +33,8 @@ public class GameManager : MonoBehaviour
     private Camera gameplayCamera;
     private bool isLoseCutSceneLoading = false;
     public bool IsGameOver => isLoseCutSceneLoading;
+    private bool diamondStolen = false;
+    public bool DiamondStolen => diamondStolen;
 
     private void Awake()
     {
@@ -118,11 +122,16 @@ public class GameManager : MonoBehaviour
             player.GetComponent<PlayerController>().enabled = true;
         }
 
+        // Khôi phục về trạng thái trước khi nhặt kim cương
+        diamondStolen = false;
+        OnRespawn.Invoke();
+
         isLoseCutSceneLoading = false;
     }
 
     public void HandleDiamondStolen()
     {
+        diamondStolen = true;
         Debug.Log("Diamond Stolen! Alert!");
         OnDiamondStolen.Invoke();
         // Additional alert logic here

@@ -1947,6 +1947,7 @@ GameObject:
   m_Component:
   - component: {fileID: 103624225}
   - component: {fileID: 103624224}
+  - component: {fileID: 103624226}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -1978,6 +1979,9 @@ MonoBehaviour:
   onWin:
     m_PersistentCalls:
       m_Calls: []
+  onRespawn:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!4 &103624225
 Transform:
   m_ObjectHideFlags: 0
@@ -1993,6 +1997,22 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &103624226
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 103624223}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05ba985b7a1c17147b9325a36c26e356, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  guards:
+  - {fileID: 752131426}
+  - {fileID: 125566587}
+  - {fileID: 1072979030}
 --- !u!1001 &104617810
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2226,6 +2246,11 @@ Transform:
 Transform:
   m_CorrespondingSourceObject: {fileID: 1273028122296617386, guid: 96ea031169ddf3d4e89f9dde97b1ba8a, type: 3}
   m_PrefabInstance: {fileID: 1732330517}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &125566587 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3459986713598694465, guid: 298fda634110bde4b8363e34284701c5, type: 3}
+  m_PrefabInstance: {fileID: 437526214}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &131180411 stripped
 Transform:
@@ -4043,7 +4068,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &295196265
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5470,7 +5495,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &369158085
 RectTransform:
   m_ObjectHideFlags: 0
@@ -10845,6 +10870,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4c1575d33a4724d4b830731859b39a8a, type: 3}
+--- !u!1 &752131426 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3459986713598694465, guid: 298fda634110bde4b8363e34284701c5, type: 3}
+  m_PrefabInstance: {fileID: 747498946}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &754998845
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11243,6 +11273,37 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5504073581910038114, guid: 4c1575d33a4724d4b830731859b39a8a, type: 3}
   m_PrefabInstance: {fileID: 330748160}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &797505836
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 797505837}
+  m_Layer: 0
+  m_Name: DiamondRespawnPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &797505837
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 797505836}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 194.55, y: 0.41, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &800998563 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5504073581910038114, guid: 4c1575d33a4724d4b830731859b39a8a, type: 3}
@@ -12025,7 +12086,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 162, y: -287}
+  m_AnchoredPosition: {x: 330, y: -239}
   m_SizeDelta: {x: 10, y: 10}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &872736671
@@ -12040,10 +12101,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3213d38e059cdb4c84c7d59004b570b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 220
-  iconSize: 110
+  radius: 150
+  iconSize: 200
   keepIconsUpright: 1
-  rotateDuration: 0.25
+  rotateDuration: 0.1
 --- !u!1001 &872787384
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12187,52 +12248,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8600ef4a00adc9e489cd6e707094992b, type: 3}
---- !u!28 &890420695
-Texture2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_IsAlphaChannelOptional: 0
-  serializedVersion: 4
-  m_Width: 1
-  m_Height: 64
-  m_CompleteImageSize: 508
-  m_MipsStripped: 0
-  m_TextureFormat: 4
-  m_MipCount: 7
-  m_IsReadable: 1
-  m_IsPreProcessed: 0
-  m_IgnoreMipmapLimit: 1
-  m_MipmapLimitGroupName: 
-  m_StreamingMipmaps: 0
-  m_StreamingMipmapsPriority: 0
-  m_VTOnly: 0
-  m_AlphaIsTransparency: 0
-  m_ImageCount: 1
-  m_TextureDimension: 2
-  m_TextureSettings:
-    serializedVersion: 2
-    m_FilterMode: 1
-    m_Aniso: 1
-    m_MipBias: 0
-    m_WrapU: 1
-    m_WrapV: 1
-    m_WrapW: 1
-  m_LightmapFormat: 0
-  m_ColorSpace: 1
-  m_PlatformBlob: 
-  image data: 508
-  _typelessdata: 000000ff040404ff080808ff0c0c0cff101010ff141414ff181818ff1c1c1cff202020ff242424ff282828ff2d2d2dff313131ff353535ff393939ff3d3d3dff414141ff454545ff494949ff4d4d4dff515151ff555555ff595959ff5d5d5dff616161ff656565ff696969ff6d6d6dff717171ff757575ff797979ff7d7d7dff828282ff868686ff8a8a8aff8e8e8eff929292ff969696ff9a9a9aff9e9e9effa2a2a2ffa6a6a6ffaaaaaaffaeaeaeffb2b2b2ffb6b6b6ffbababaffbebebeffc2c2c2ffc6c6c6ffcacacaffcececeffd2d2d2ffd7d7d7ffdbdbdbffdfdfdfffe3e3e3ffe7e7e7ffebebebffefefeffff3f3f3fff7f7f7fffbfbfbffffffffff020202ff0a0a0aff121212ff1a1a1aff222222ff2a2a2aff333333ff3b3b3bff434343ff4b4b4bff535353ff5b5b5bff636363ff6b6b6bff737373ff7b7b7bff848484ff8c8c8cff949494ff9c9c9cffa4a4a4ffacacacffb4b4b4ffbcbcbcffc4c4c4ffccccccffd4d4d4ffddddddffe5e5e5ffedededfff5f5f5fffdfdfdff060606ff161616ff262626ff373737ff474747ff575757ff676767ff777777ff888888ff989898ffa8a8a8ffb8b8b8ffc8c8c8ffd8d8d8ffe9e9e9fff9f9f9ff0e0e0eff2e2e2eff4f4f4fff6f6f6fff909090ffb0b0b0ffd0d0d0fff1f1f1ff1e1e1eff5f5f5fffa0a0a0ffe0e0e0ff3e3e3effc0c0c0ff7f7f7fff
-  m_StreamData:
-    serializedVersion: 2
-    offset: 0
-    size: 0
-    path: 
 --- !u!4 &891244263 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5504073581910038114, guid: 4c1575d33a4724d4b830731859b39a8a, type: 3}
@@ -14902,6 +14917,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5504073581910038114, guid: 4c1575d33a4724d4b830731859b39a8a, type: 3}
   m_PrefabInstance: {fileID: 1975192437}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1072979030 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3459986713598694465, guid: 298fda634110bde4b8363e34284701c5, type: 3}
+  m_PrefabInstance: {fileID: 1409770898}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1073130281
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16481,6 +16501,10 @@ PrefabInstance:
     - target: {fileID: 2048792636093538701, guid: bb65a0437a4c6524f8447f0048277b7d, type: 3}
       propertyPath: m_Name
       value: ButtonSetModeNormal
+      objectReference: {fileID: 0}
+    - target: {fileID: 2048792636093538701, guid: bb65a0437a4c6524f8447f0048277b7d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3782449080285262109, guid: bb65a0437a4c6524f8447f0048277b7d, type: 3}
       propertyPath: m_Name
@@ -24038,6 +24062,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Diamond
       objectReference: {fileID: 0}
+    - target: {fileID: 3647624736099852649, guid: 6e3aaf948ea56974fb7703f4f2e35c45, type: 3}
+      propertyPath: respawnPoint
+      value: 
+      objectReference: {fileID: 797505837}
     - target: {fileID: 5927224348140347202, guid: 6e3aaf948ea56974fb7703f4f2e35c45, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.04
@@ -24402,216 +24430,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4c1575d33a4724d4b830731859b39a8a, type: 3}
---- !u!213 &1613963115
-Sprite:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 
-  m_Rect:
-    serializedVersion: 2
-    x: 0
-    y: 0
-    width: 1
-    height: 64
-  m_Offset: {x: 0, y: 0}
-  m_Border: {x: 0, y: 0, z: 0, w: 0}
-  m_PixelsToUnits: 100
-  m_Pivot: {x: 0.5, y: 0.5}
-  m_Extrude: 0
-  m_IsPolygon: 0
-  m_PackingTag: 
-  m_RenderDataKey:
-    00000000000000000000000000000000: 0
-  m_AtlasTags: []
-  m_SpriteAtlas: {fileID: 0}
-  m_RD:
-    serializedVersion: 3
-    texture: {fileID: 890420695}
-    alphaTexture: {fileID: 0}
-    secondaryTextures: []
-    m_SubMeshes:
-    - serializedVersion: 2
-      firstByte: 0
-      indexCount: 6
-      topology: 0
-      baseVertex: 0
-      firstVertex: 0
-      vertexCount: 4
-      localAABB:
-        m_Center: {x: 0, y: 0, z: 0}
-        m_Extent: {x: 0, y: 0, z: 0}
-    m_IndexBuffer: 000001000200020001000300
-    m_VertexData:
-      serializedVersion: 3
-      m_VertexCount: 4
-      m_Channels:
-      - stream: 0
-        offset: 0
-        format: 0
-        dimension: 3
-      - stream: 0
-        offset: 0
-        format: 0
-        dimension: 0
-      - stream: 0
-        offset: 0
-        format: 0
-        dimension: 0
-      - stream: 0
-        offset: 0
-        format: 0
-        dimension: 0
-      - stream: 1
-        offset: 0
-        format: 0
-        dimension: 2
-      - stream: 0
-        offset: 0
-        format: 0
-        dimension: 0
-      - stream: 0
-        offset: 0
-        format: 0
-        dimension: 0
-      - stream: 0
-        offset: 0
-        format: 0
-        dimension: 0
-      - stream: 0
-        offset: 0
-        format: 0
-        dimension: 0
-      - stream: 0
-        offset: 0
-        format: 0
-        dimension: 0
-      - stream: 0
-        offset: 0
-        format: 0
-        dimension: 0
-      - stream: 0
-        offset: 0
-        format: 0
-        dimension: 0
-      - stream: 0
-        offset: 0
-        format: 0
-        dimension: 0
-      - stream: 0
-        offset: 0
-        format: 0
-        dimension: 0
-      m_DataSize: 80
-      _typelessdata: 0ad7a3bb0ad7a33e000000000ad7a33b0ad7a33e000000000ad7a3bb0ad7a3be000000000ad7a33b0ad7a3be000000000000000000000000000000000000000000000000000000000000000000000000
-    m_Bindpose: []
-    textureRect:
-      serializedVersion: 2
-      x: 0
-      y: 0
-      width: 1
-      height: 64
-    textureRectOffset: {x: 0, y: 0}
-    atlasRectOffset: {x: -1, y: -1}
-    settingsRaw: 64
-    uvTransform: {x: 100, y: 0.5, z: 100, w: 32}
-    downscaleMultiplier: 1
-  m_AtlasRD:
-    serializedVersion: 3
-    texture: {fileID: 890420695}
-    alphaTexture: {fileID: 0}
-    secondaryTextures: []
-    m_SubMeshes:
-    - serializedVersion: 2
-      firstByte: 0
-      indexCount: 6
-      topology: 0
-      baseVertex: 0
-      firstVertex: 0
-      vertexCount: 4
-      localAABB:
-        m_Center: {x: 0, y: 0, z: 0}
-        m_Extent: {x: 0, y: 0, z: 0}
-    m_IndexBuffer: 000001000200020001000300
-    m_VertexData:
-      serializedVersion: 3
-      m_VertexCount: 4
-      m_Channels:
-      - stream: 0
-        offset: 0
-        format: 0
-        dimension: 3
-      - stream: 0
-        offset: 0
-        format: 0
-        dimension: 0
-      - stream: 0
-        offset: 0
-        format: 0
-        dimension: 0
-      - stream: 0
-        offset: 0
-        format: 0
-        dimension: 0
-      - stream: 1
-        offset: 0
-        format: 0
-        dimension: 2
-      - stream: 0
-        offset: 0
-        format: 0
-        dimension: 0
-      - stream: 0
-        offset: 0
-        format: 0
-        dimension: 0
-      - stream: 0
-        offset: 0
-        format: 0
-        dimension: 0
-      - stream: 0
-        offset: 0
-        format: 0
-        dimension: 0
-      - stream: 0
-        offset: 0
-        format: 0
-        dimension: 0
-      - stream: 0
-        offset: 0
-        format: 0
-        dimension: 0
-      - stream: 0
-        offset: 0
-        format: 0
-        dimension: 0
-      - stream: 0
-        offset: 0
-        format: 0
-        dimension: 0
-      - stream: 0
-        offset: 0
-        format: 0
-        dimension: 0
-      m_DataSize: 80
-      _typelessdata: 0ad7a3bb0ad7a33e000000000ad7a33b0ad7a33e000000000ad7a3bb0ad7a3be000000000ad7a33b0ad7a3be000000000000000000000000000000000000000000000000000000000000000000000000
-    m_Bindpose: []
-    textureRect:
-      serializedVersion: 2
-      x: 0
-      y: 0
-      width: 1
-      height: 64
-    textureRectOffset: {x: 0, y: 0}
-    atlasRectOffset: {x: -1, y: -1}
-    settingsRaw: 64
-    uvTransform: {x: 100, y: 0.5, z: 100, w: 32}
-    downscaleMultiplier: 1
-  m_PhysicsShape: []
-  m_Bones: []
-  m_ScriptableObjects: []
-  m_SpriteID: 
 --- !u!4 &1617415375 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5504073581910038114, guid: 4c1575d33a4724d4b830731859b39a8a, type: 3}
@@ -32793,7 +32611,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9007911916893921991, guid: 4ad5b3bbe32bf2a4e937c2b19059238c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -31.4
+      value: 182.63
       objectReference: {fileID: 0}
     - target: {fileID: 9007911916893921991, guid: 4ad5b3bbe32bf2a4e937c2b19059238c, type: 3}
       propertyPath: m_LocalPosition.y
@@ -33047,3 +32865,4 @@ SceneRoots:
   - {fileID: 745362604}
   - {fileID: 994041918}
   - {fileID: 78939032}
+  - {fileID: 797505837}
