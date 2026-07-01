@@ -11,6 +11,7 @@ public class AttendeeMovement : MonoBehaviour
 
     private Vector2 wanderingTarget = Vector2.zero;
     private float wanderingTimer = 0f;
+    private bool isWandering = true;
 
     private Rigidbody2D rb;
     void Start()
@@ -28,6 +29,8 @@ public class AttendeeMovement : MonoBehaviour
 
     private void Wandering()
     {
+        if (!isWandering) return;
+
         wanderingTimer -= Time.fixedDeltaTime;
         if (wanderingTimer <= 0f)
         {
@@ -43,8 +46,14 @@ public class AttendeeMovement : MonoBehaviour
         rb.linearVelocity = direction * (targetZone.IsPointInsideZone(transform.position) ? insideSpeed : outsideSpeed);
     }
 
-    private void OnDrawGizmos()
+    public void StopMovement()
     {
-        
+        isWandering = false;
+        rb.linearVelocity = Vector2.zero;
+    }
+
+    public void ResumeMovement()
+    {
+        isWandering = true;
     }
 }
