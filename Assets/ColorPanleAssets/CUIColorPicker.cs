@@ -34,6 +34,10 @@ public class CUIColorPicker : MonoBehaviour
     [SerializeField] private Image modeButtonIcon; // Image của nút bấm, sẽ đổi sprite theo mode
     [SerializeField] private Sprite[] modeSprites = new Sprite[4]; // theo thứ tự enum MaskMode: Normal, Grayscale, Cipher, TrapMask
 
+    // ── Bánh xe mặt nạ (UI) ──────────────────────────────────
+    [Header("Mask Wheel UI")]
+    [SerializeField] private MaskWheelUI maskWheel;
+
     public void SetOnValueChangeCallback(Action<Color> onValueChange)
     {
         _onValueChange = onValueChange;
@@ -51,6 +55,9 @@ public class CUIColorPicker : MonoBehaviour
         passwords = GameObject.FindGameObjectsWithTag("Password");
         _trapObjects = GameObject.FindGameObjectsWithTag("Trap");
         SetTrapSpritesVisible(false);
+
+        if (maskWheel != null)
+            maskWheel.Rebuild(_unlockedModes, modeSprites, (int)currentMode);
     }
 
     private static bool GetLocalMouse(GameObject go, out Vector2 result) //kiem tra tro chuot co trong object ko, tra ve vi tri cuc bo
@@ -133,7 +140,11 @@ public class CUIColorPicker : MonoBehaviour
     public void UnlockMode(int modeIndex)
     {
         if (modeIndex >= 0 && modeIndex < 4 && !_unlockedModes.Contains(modeIndex))
+        {
             _unlockedModes.Add(modeIndex);
+            if (maskWheel != null)
+                maskWheel.Rebuild(_unlockedModes, modeSprites, (int)currentMode);
+        }
     }
 
     public void SetMaskMode(int i)
@@ -162,6 +173,9 @@ public class CUIColorPicker : MonoBehaviour
 
         UpdateModeSprite();
         Setup(_color);
+
+        if (maskWheel != null)
+            maskWheel.RotateToMode(i);
     }
 
     /// <summary>Đổi sprite icon trên nút UI và sprite mặt nạ player đang đeo theo mode hiện tại.</summary>
