@@ -1583,7 +1583,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   netTrapSprite: {fileID: 7243614311576365942, guid: 9ca2b2d72ce3ae14299371f864b67379, type: 3}
-  catchAnimDuration: 1
+  freezeDuration: 5
 --- !u!61 &78939034
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -7984,7 +7984,7 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8706243467870627317, guid: 96ea031169ddf3d4e89f9dde97b1ba8a, type: 3}
-      propertyPath: enemiesGroup.Array.data[0]
+      propertyPath: 'enemiesGroup.Array.data[0]'
       value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -9965,15 +9965,15 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8706243467870627317, guid: 96ea031169ddf3d4e89f9dde97b1ba8a, type: 3}
-      propertyPath: enemiesGroup.Array.data[0]
+      propertyPath: 'enemiesGroup.Array.data[0]'
       value: 
       objectReference: {fileID: 1037155278}
     - target: {fileID: 8706243467870627317, guid: 96ea031169ddf3d4e89f9dde97b1ba8a, type: 3}
-      propertyPath: enemiesGroup.Array.data[1]
+      propertyPath: 'enemiesGroup.Array.data[1]'
       value: 
       objectReference: {fileID: 1081349188}
     - target: {fileID: 8706243467870627317, guid: 96ea031169ddf3d4e89f9dde97b1ba8a, type: 3}
-      propertyPath: enemiesGroup.Array.data[2]
+      propertyPath: 'enemiesGroup.Array.data[2]'
       value: 
       objectReference: {fileID: 292588717}
     m_RemovedComponents: []
@@ -11992,6 +11992,58 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5504073581910038114, guid: 4c1575d33a4724d4b830731859b39a8a, type: 3}
   m_PrefabInstance: {fileID: 867268841}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &872736669
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 872736670}
+  - component: {fileID: 872736671}
+  m_Layer: 0
+  m_Name: MaskWheel
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &872736670
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 872736669}
+  m_LocalRotation: {x: 0, y: 0, z: 0.7070463, w: 0.70716727}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.41666663, y: 0.41666663, z: 0.41666663}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1167858780}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 162, y: -287}
+  m_SizeDelta: {x: 10, y: 10}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &872736671
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 872736669}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3213d38e059cdb4c84c7d59004b570b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  radius: 220
+  iconSize: 110
+  keepIconsUpright: 1
+  rotateDuration: 0.25
 --- !u!1001 &872787384
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12135,6 +12187,52 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8600ef4a00adc9e489cd6e707094992b, type: 3}
+--- !u!28 &890420695
+Texture2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_IsAlphaChannelOptional: 0
+  serializedVersion: 4
+  m_Width: 1
+  m_Height: 64
+  m_CompleteImageSize: 508
+  m_MipsStripped: 0
+  m_TextureFormat: 4
+  m_MipCount: 7
+  m_IsReadable: 1
+  m_IsPreProcessed: 0
+  m_IgnoreMipmapLimit: 1
+  m_MipmapLimitGroupName: 
+  m_StreamingMipmaps: 0
+  m_StreamingMipmapsPriority: 0
+  m_VTOnly: 0
+  m_AlphaIsTransparency: 0
+  m_ImageCount: 1
+  m_TextureDimension: 2
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 1
+    m_WrapV: 1
+    m_WrapW: 1
+  m_LightmapFormat: 0
+  m_ColorSpace: 1
+  m_PlatformBlob: 
+  image data: 508
+  _typelessdata: 000000ff040404ff080808ff0c0c0cff101010ff141414ff181818ff1c1c1cff202020ff242424ff282828ff2d2d2dff313131ff353535ff393939ff3d3d3dff414141ff454545ff494949ff4d4d4dff515151ff555555ff595959ff5d5d5dff616161ff656565ff696969ff6d6d6dff717171ff757575ff797979ff7d7d7dff828282ff868686ff8a8a8aff8e8e8eff929292ff969696ff9a9a9aff9e9e9effa2a2a2ffa6a6a6ffaaaaaaffaeaeaeffb2b2b2ffb6b6b6ffbababaffbebebeffc2c2c2ffc6c6c6ffcacacaffcececeffd2d2d2ffd7d7d7ffdbdbdbffdfdfdfffe3e3e3ffe7e7e7ffebebebffefefeffff3f3f3fff7f7f7fffbfbfbffffffffff020202ff0a0a0aff121212ff1a1a1aff222222ff2a2a2aff333333ff3b3b3bff434343ff4b4b4bff535353ff5b5b5bff636363ff6b6b6bff737373ff7b7b7bff848484ff8c8c8cff949494ff9c9c9cffa4a4a4ffacacacffb4b4b4ffbcbcbcffc4c4c4ffccccccffd4d4d4ffddddddffe5e5e5ffedededfff5f5f5fffdfdfdff060606ff161616ff262626ff373737ff474747ff575757ff676767ff777777ff888888ff989898ffa8a8a8ffb8b8b8ffc8c8c8ffd8d8d8ffe9e9e9fff9f9f9ff0e0e0eff2e2e2eff4f4f4fff6f6f6fff909090ffb0b0b0ffd0d0d0fff1f1f1ff1e1e1eff5f5f5fffa0a0a0ffe0e0e0ff3e3e3effc0c0c0ff7f7f7fff
+  m_StreamData:
+    serializedVersion: 2
+    offset: 0
+    size: 0
+    path: 
 --- !u!4 &891244263 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5504073581910038114, guid: 4c1575d33a4724d4b830731859b39a8a, type: 3}
@@ -16263,11 +16361,11 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8706243467870627317, guid: 96ea031169ddf3d4e89f9dde97b1ba8a, type: 3}
-      propertyPath: enemiesGroup.Array.data[0]
+      propertyPath: 'enemiesGroup.Array.data[0]'
       value: 
       objectReference: {fileID: 498778329}
     - target: {fileID: 8706243467870627317, guid: 96ea031169ddf3d4e89f9dde97b1ba8a, type: 3}
-      propertyPath: enemiesGroup.Array.data[1]
+      propertyPath: 'enemiesGroup.Array.data[1]'
       value: 
       objectReference: {fileID: 496394995}
     m_RemovedComponents: []
@@ -16473,6 +16571,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 958117200}
     - target: {fileID: 6019399812853504770, guid: bb65a0437a4c6524f8447f0048277b7d, type: 3}
+      propertyPath: maskWheel
+      value: 
+      objectReference: {fileID: 872736671}
+    - target: {fileID: 6019399812853504770, guid: bb65a0437a4c6524f8447f0048277b7d, type: 3}
       propertyPath: playerObject
       value: 
       objectReference: {fileID: 1885429978}
@@ -16480,6 +16582,22 @@ PrefabInstance:
       propertyPath: activeModeCount
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6019399812853504770, guid: bb65a0437a4c6524f8447f0048277b7d, type: 3}
+      propertyPath: 'modeSprites.Array.data[0]'
+      value: 
+      objectReference: {fileID: -1451423090783449148, guid: 71ffc1b966b804e448765a5746dce957, type: 3}
+    - target: {fileID: 6019399812853504770, guid: bb65a0437a4c6524f8447f0048277b7d, type: 3}
+      propertyPath: 'modeSprites.Array.data[1]'
+      value: 
+      objectReference: {fileID: 21300000, guid: 89c4076bbcf9ba644a47f503bf713caa, type: 3}
+    - target: {fileID: 6019399812853504770, guid: bb65a0437a4c6524f8447f0048277b7d, type: 3}
+      propertyPath: 'modeSprites.Array.data[2]'
+      value: 
+      objectReference: {fileID: 21300000, guid: fabda3ed7a3bb9b4d91ed1068fa906f7, type: 3}
+    - target: {fileID: 6019399812853504770, guid: bb65a0437a4c6524f8447f0048277b7d, type: 3}
+      propertyPath: 'modeSprites.Array.data[3]'
+      value: 
+      objectReference: {fileID: 21300000, guid: 170decff0185a4940aae514593f4069f, type: 3}
     - target: {fileID: 6019399812858973920, guid: bb65a0437a4c6524f8447f0048277b7d, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -16487,6 +16605,10 @@ PrefabInstance:
     - target: {fileID: 6019399812881313856, guid: bb65a0437a4c6524f8447f0048277b7d, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 1523
+      objectReference: {fileID: 0}
+    - target: {fileID: 6019399812881313864, guid: bb65a0437a4c6524f8447f0048277b7d, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 149.5
       objectReference: {fileID: 0}
     - target: {fileID: 7626633361223547057, guid: bb65a0437a4c6524f8447f0048277b7d, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
@@ -16530,6 +16652,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 5254851356795894575, guid: bb65a0437a4c6524f8447f0048277b7d, type: 3}
       insertIndex: -1
       addedObject: {fileID: 354681101}
+    - targetCorrespondingSourceObject: {fileID: 5254851356795894575, guid: bb65a0437a4c6524f8447f0048277b7d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 872736670}
     - targetCorrespondingSourceObject: {fileID: 6019399812881313858, guid: bb65a0437a4c6524f8447f0048277b7d, type: 3}
       insertIndex: -1
       addedObject: {fileID: 295196265}
@@ -17398,11 +17523,11 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8706243467870627317, guid: 96ea031169ddf3d4e89f9dde97b1ba8a, type: 3}
-      propertyPath: enemiesGroup.Array.data[0]
+      propertyPath: 'enemiesGroup.Array.data[0]'
       value: 
       objectReference: {fileID: 2050140694}
     - target: {fileID: 8706243467870627317, guid: 96ea031169ddf3d4e89f9dde97b1ba8a, type: 3}
-      propertyPath: enemiesGroup.Array.data[1]
+      propertyPath: 'enemiesGroup.Array.data[1]'
       value: 
       objectReference: {fileID: 184791048}
     m_RemovedComponents: []
@@ -17831,15 +17956,15 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8706243467870627317, guid: 96ea031169ddf3d4e89f9dde97b1ba8a, type: 3}
-      propertyPath: enemiesGroup.Array.data[0]
+      propertyPath: 'enemiesGroup.Array.data[0]'
       value: 
       objectReference: {fileID: 1509476761}
     - target: {fileID: 8706243467870627317, guid: 96ea031169ddf3d4e89f9dde97b1ba8a, type: 3}
-      propertyPath: enemiesGroup.Array.data[1]
+      propertyPath: 'enemiesGroup.Array.data[1]'
       value: 
       objectReference: {fileID: 1424190350}
     - target: {fileID: 8706243467870627317, guid: 96ea031169ddf3d4e89f9dde97b1ba8a, type: 3}
-      propertyPath: enemiesGroup.Array.data[2]
+      propertyPath: 'enemiesGroup.Array.data[2]'
       value: 
       objectReference: {fileID: 1341745718}
     m_RemovedComponents: []
@@ -21984,11 +22109,11 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8706243467870627317, guid: 96ea031169ddf3d4e89f9dde97b1ba8a, type: 3}
-      propertyPath: enemiesGroup.Array.data[0]
+      propertyPath: 'enemiesGroup.Array.data[0]'
       value: 
       objectReference: {fileID: 1902815235}
     - target: {fileID: 8706243467870627317, guid: 96ea031169ddf3d4e89f9dde97b1ba8a, type: 3}
-      propertyPath: enemiesGroup.Array.data[1]
+      propertyPath: 'enemiesGroup.Array.data[1]'
       value: 
       objectReference: {fileID: 1849917913}
     m_RemovedComponents: []
@@ -23808,7 +23933,7 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8706243467870627317, guid: 96ea031169ddf3d4e89f9dde97b1ba8a, type: 3}
-      propertyPath: enemiesGroup.Array.data[0]
+      propertyPath: 'enemiesGroup.Array.data[0]'
       value: 
       objectReference: {fileID: 1327899065}
     m_RemovedComponents: []
@@ -24277,6 +24402,216 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4c1575d33a4724d4b830731859b39a8a, type: 3}
+--- !u!213 &1613963115
+Sprite:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_Rect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 64
+  m_Offset: {x: 0, y: 0}
+  m_Border: {x: 0, y: 0, z: 0, w: 0}
+  m_PixelsToUnits: 100
+  m_Pivot: {x: 0.5, y: 0.5}
+  m_Extrude: 0
+  m_IsPolygon: 0
+  m_PackingTag: 
+  m_RenderDataKey:
+    00000000000000000000000000000000: 0
+  m_AtlasTags: []
+  m_SpriteAtlas: {fileID: 0}
+  m_RD:
+    serializedVersion: 3
+    texture: {fileID: 890420695}
+    alphaTexture: {fileID: 0}
+    secondaryTextures: []
+    m_SubMeshes:
+    - serializedVersion: 2
+      firstByte: 0
+      indexCount: 6
+      topology: 0
+      baseVertex: 0
+      firstVertex: 0
+      vertexCount: 4
+      localAABB:
+        m_Center: {x: 0, y: 0, z: 0}
+        m_Extent: {x: 0, y: 0, z: 0}
+    m_IndexBuffer: 000001000200020001000300
+    m_VertexData:
+      serializedVersion: 3
+      m_VertexCount: 4
+      m_Channels:
+      - stream: 0
+        offset: 0
+        format: 0
+        dimension: 3
+      - stream: 0
+        offset: 0
+        format: 0
+        dimension: 0
+      - stream: 0
+        offset: 0
+        format: 0
+        dimension: 0
+      - stream: 0
+        offset: 0
+        format: 0
+        dimension: 0
+      - stream: 1
+        offset: 0
+        format: 0
+        dimension: 2
+      - stream: 0
+        offset: 0
+        format: 0
+        dimension: 0
+      - stream: 0
+        offset: 0
+        format: 0
+        dimension: 0
+      - stream: 0
+        offset: 0
+        format: 0
+        dimension: 0
+      - stream: 0
+        offset: 0
+        format: 0
+        dimension: 0
+      - stream: 0
+        offset: 0
+        format: 0
+        dimension: 0
+      - stream: 0
+        offset: 0
+        format: 0
+        dimension: 0
+      - stream: 0
+        offset: 0
+        format: 0
+        dimension: 0
+      - stream: 0
+        offset: 0
+        format: 0
+        dimension: 0
+      - stream: 0
+        offset: 0
+        format: 0
+        dimension: 0
+      m_DataSize: 80
+      _typelessdata: 0ad7a3bb0ad7a33e000000000ad7a33b0ad7a33e000000000ad7a3bb0ad7a3be000000000ad7a33b0ad7a3be000000000000000000000000000000000000000000000000000000000000000000000000
+    m_Bindpose: []
+    textureRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 1
+      height: 64
+    textureRectOffset: {x: 0, y: 0}
+    atlasRectOffset: {x: -1, y: -1}
+    settingsRaw: 64
+    uvTransform: {x: 100, y: 0.5, z: 100, w: 32}
+    downscaleMultiplier: 1
+  m_AtlasRD:
+    serializedVersion: 3
+    texture: {fileID: 890420695}
+    alphaTexture: {fileID: 0}
+    secondaryTextures: []
+    m_SubMeshes:
+    - serializedVersion: 2
+      firstByte: 0
+      indexCount: 6
+      topology: 0
+      baseVertex: 0
+      firstVertex: 0
+      vertexCount: 4
+      localAABB:
+        m_Center: {x: 0, y: 0, z: 0}
+        m_Extent: {x: 0, y: 0, z: 0}
+    m_IndexBuffer: 000001000200020001000300
+    m_VertexData:
+      serializedVersion: 3
+      m_VertexCount: 4
+      m_Channels:
+      - stream: 0
+        offset: 0
+        format: 0
+        dimension: 3
+      - stream: 0
+        offset: 0
+        format: 0
+        dimension: 0
+      - stream: 0
+        offset: 0
+        format: 0
+        dimension: 0
+      - stream: 0
+        offset: 0
+        format: 0
+        dimension: 0
+      - stream: 1
+        offset: 0
+        format: 0
+        dimension: 2
+      - stream: 0
+        offset: 0
+        format: 0
+        dimension: 0
+      - stream: 0
+        offset: 0
+        format: 0
+        dimension: 0
+      - stream: 0
+        offset: 0
+        format: 0
+        dimension: 0
+      - stream: 0
+        offset: 0
+        format: 0
+        dimension: 0
+      - stream: 0
+        offset: 0
+        format: 0
+        dimension: 0
+      - stream: 0
+        offset: 0
+        format: 0
+        dimension: 0
+      - stream: 0
+        offset: 0
+        format: 0
+        dimension: 0
+      - stream: 0
+        offset: 0
+        format: 0
+        dimension: 0
+      - stream: 0
+        offset: 0
+        format: 0
+        dimension: 0
+      m_DataSize: 80
+      _typelessdata: 0ad7a3bb0ad7a33e000000000ad7a33b0ad7a33e000000000ad7a3bb0ad7a3be000000000ad7a33b0ad7a3be000000000000000000000000000000000000000000000000000000000000000000000000
+    m_Bindpose: []
+    textureRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 1
+      height: 64
+    textureRectOffset: {x: 0, y: 0}
+    atlasRectOffset: {x: -1, y: -1}
+    settingsRaw: 64
+    uvTransform: {x: 100, y: 0.5, z: 100, w: 32}
+    downscaleMultiplier: 1
+  m_PhysicsShape: []
+  m_Bones: []
+  m_ScriptableObjects: []
+  m_SpriteID: 
 --- !u!4 &1617415375 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5504073581910038114, guid: 4c1575d33a4724d4b830731859b39a8a, type: 3}
@@ -24581,7 +24916,6 @@ MonoBehaviour:
   - {x: 0.4208553, y: 0.27616346, z: 0}
   - {x: 0.41051108, y: -0.24621916, z: 0}
   moveSpeed: 2
-  _nextWaypointIndex: 0
 --- !u!212 &1639871609
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -29435,15 +29769,15 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8706243467870627317, guid: 96ea031169ddf3d4e89f9dde97b1ba8a, type: 3}
-      propertyPath: enemiesGroup.Array.data[0]
+      propertyPath: 'enemiesGroup.Array.data[0]'
       value: 
       objectReference: {fileID: 1938086933}
     - target: {fileID: 8706243467870627317, guid: 96ea031169ddf3d4e89f9dde97b1ba8a, type: 3}
-      propertyPath: enemiesGroup.Array.data[1]
+      propertyPath: 'enemiesGroup.Array.data[1]'
       value: 
       objectReference: {fileID: 1712960102}
     - target: {fileID: 8706243467870627317, guid: 96ea031169ddf3d4e89f9dde97b1ba8a, type: 3}
-      propertyPath: enemiesGroup.Array.data[2]
+      propertyPath: 'enemiesGroup.Array.data[2]'
       value: 
       objectReference: {fileID: 721609090}
     m_RemovedComponents: []
@@ -32401,7 +32735,7 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8706243467870627317, guid: 96ea031169ddf3d4e89f9dde97b1ba8a, type: 3}
-      propertyPath: enemiesGroup.Array.data[0]
+      propertyPath: 'enemiesGroup.Array.data[0]'
       value: 
       objectReference: {fileID: 390662764}
     m_RemovedComponents: []
@@ -32444,6 +32778,18 @@ PrefabInstance:
     - target: {fileID: 5696155665230836418, guid: 4ad5b3bbe32bf2a4e937c2b19059238c, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 8786672484212499640, guid: 4ad5b3bbe32bf2a4e937c2b19059238c, type: 3}
+      propertyPath: m_Color.b
+      value: 0.299
+      objectReference: {fileID: 0}
+    - target: {fileID: 8786672484212499640, guid: 4ad5b3bbe32bf2a4e937c2b19059238c, type: 3}
+      propertyPath: m_Color.g
+      value: 0.299
+      objectReference: {fileID: 0}
+    - target: {fileID: 8786672484212499640, guid: 4ad5b3bbe32bf2a4e937c2b19059238c, type: 3}
+      propertyPath: m_Color.r
+      value: 0.299
       objectReference: {fileID: 0}
     - target: {fileID: 9007911916893921991, guid: 4ad5b3bbe32bf2a4e937c2b19059238c, type: 3}
       propertyPath: m_LocalPosition.x
