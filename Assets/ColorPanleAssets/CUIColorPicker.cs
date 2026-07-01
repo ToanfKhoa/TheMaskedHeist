@@ -170,16 +170,20 @@ public class CUIColorPicker : MonoBehaviour
         int idx = (int)currentMode;
         if (modeSprites == null || idx < 0 || idx >= modeSprites.Length) return;
 
-        Sprite sprite = modeSprites[idx];
-        if (sprite == null) return;
+        Sprite iconSprite = modeSprites[idx];
+        if (iconSprite != null && modeButtonIcon != null)
+            modeButtonIcon.sprite = iconSprite;
 
-        if (modeButtonIcon != null)
-            modeButtonIcon.sprite = sprite;
+        // Grayscale vẫn tô màu lên mặt nạ player nên dùng chung sprite Normal,
+        // không dùng sprite icon (đã cố định màu đen) để tránh bị đè màu.
+        int playerSpriteIdx = currentMode == MaskMode.Grayscale ? (int)MaskMode.Normal : idx;
+        Sprite playerSprite = modeSprites[playerSpriteIdx];
+        if (playerSprite == null) return;
 
         if (playerObject != null)
         {
             var sr = playerObject.GetComponent<SpriteRenderer>();
-            if (sr != null) sr.sprite = sprite;
+            if (sr != null) sr.sprite = playerSprite;
         }
     }
 
