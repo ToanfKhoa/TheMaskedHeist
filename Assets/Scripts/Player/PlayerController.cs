@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
 
     private Vector2 moveInput = Vector2.zero;
     private Rigidbody2D rb;
+    private bool movementLocked = false;
     [SerializeField] Animator animator;
 
     [SerializeField] private Transform holdPivot;
@@ -53,10 +54,29 @@ public class PlayerController : MonoBehaviour
     // -------------------------
     private void FixedUpdate()
     {
+        if (movementLocked)
+        {
+            rb.linearVelocity = Vector2.zero;
+            return;
+        }
+
         Vector2 currentMove = moveInput.normalized * moveSpeed * Time.fixedDeltaTime;
         Vector2 targetPosition = rb.position + currentMove;
 
         rb.MovePosition(targetPosition);
+    }
+
+    // Locks/unlocks player movement (e.g. while caught in a trap net).
+    public void SetMovementLocked(bool locked)
+    {
+        movementLocked = locked;
+        if (locked)
+        {
+            moveInput = Vector2.zero;
+            rb.linearVelocity = Vector2.zero;
+            if (animator != null)
+                animator.SetBool("isRunning", false);
+        }
     }
 
     // -------------------------
