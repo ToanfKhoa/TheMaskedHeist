@@ -4,10 +4,14 @@ public class Diamond : MonoBehaviour
 {
     [Tooltip("Điểm hồi sinh sau khi nhặt kim cương (đặt cách xa viên kim cương để phần khôi phục có ý nghĩa). Bỏ trống = dùng ngay vị trí kim cương.")]
     [SerializeField] private Transform respawnPoint;
+    [Tooltip("Sorting order của sprite kim cương khi đang cầm (để vẽ trên mặt nạ player).")]
+    [SerializeField] private int heldSortingOrder = 100;
 
     private Vector3 _originalPosition;
     private Transform _originalParent;
     private Vector3 _checkpointPos;
+    private SpriteRenderer _skin;
+    private int _originalSortingOrder;
     private bool _collected = false;
 
     private void Awake()
@@ -15,6 +19,8 @@ public class Diamond : MonoBehaviour
         _originalPosition = transform.position;
         _originalParent = transform.parent;
         _checkpointPos = respawnPoint != null ? respawnPoint.position : transform.position;
+        _skin = GetComponentInChildren<SpriteRenderer>();
+        if (_skin != null) _originalSortingOrder = _skin.sortingOrder;
     }
 
     private void Start()
@@ -36,6 +42,7 @@ public class Diamond : MonoBehaviour
         if (player != null)
         {
             player.HoldDiamond(this.gameObject);
+            if (_skin != null) _skin.sortingOrder = heldSortingOrder; // vẽ trên mặt nạ player
         }
 
         if (GameManager.Instance != null)
@@ -57,6 +64,7 @@ public class Diamond : MonoBehaviour
         _collected = false;
         transform.SetParent(_originalParent);
         transform.position = _originalPosition;
+        if (_skin != null) _skin.sortingOrder = _originalSortingOrder;
         gameObject.SetActive(true);
     }
 }
