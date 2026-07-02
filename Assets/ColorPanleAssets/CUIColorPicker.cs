@@ -28,6 +28,7 @@ public class CUIColorPicker : MonoBehaviour
     private MaskMode currentMode = MaskMode.Normal;
     private readonly List<int> _unlockedModes = new List<int> { 0 }; // thứ tự unlock quyết định thứ tự cycle
     private GameObject[] _trapObjects;
+    private readonly Dictionary<GameObject, int> _trapOriginalSortingOrder = new Dictionary<GameObject, int>();
 
     // ── Nút đổi mode trên UI (vd. nút GRAY) + sprite mặt nạ tương ứng ──
     [Header("Mode Button UI")]
@@ -247,10 +248,28 @@ public class CUIColorPicker : MonoBehaviour
 
     private void SetTrapSpritesVisible(bool visible)
     {
+        var filterRenderer = filter?.GetComponent<SpriteRenderer>();
+        int aboveFilterOrder = filterRenderer != null ? filterRenderer.sortingOrder + 1 : 0;
+
         foreach (var trap in _trapObjects)
         {
             var sr = trap.GetComponent<SpriteRenderer>();
-            if (sr != null) sr.enabled = visible;
+            if (sr == null) continue;
+
+            if (visible)
+            {
+                // Nhớ sortingOrder gốc để trả lại khi tắt TrapMask, đồng thời đẩy trap
+                // lên trên lớp Filter để không bị filter tối che mất.
+                if (!_trapOriginalSortingOrder.ContainsKey(trap))
+                    _trapOriginalSortingOrder[trap] = sr.sortingOrder;
+                sr.sortingOrder = aboveFilterOrder;
+            }
+            else if (_trapOriginalSortingOrder.TryGetValue(trap, out int originalOrder))
+            {
+                sr.sortingOrder = originalOrder;
+            }
+
+            sr.enabled = visible;
         }
     }
 
