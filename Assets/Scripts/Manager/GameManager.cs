@@ -124,6 +124,8 @@ public class GameManager : MonoBehaviour
 
         // Khôi phục về trạng thái trước khi nhặt kim cương
         diamondStolen = false;
+        if (SoundManager.Instance != null)
+            SoundManager.Instance.PlayMusic(SoundManager.Instance.partyMusic1);
         OnRespawn.Invoke();
 
         isLoseCutSceneLoading = false;
