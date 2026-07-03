@@ -19091,7 +19091,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8706243467870627317, guid: 96ea031169ddf3d4e89f9dde97b1ba8a, type: 3}
       propertyPath: enemiesGroup.Array.size
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8706243467870627317, guid: 96ea031169ddf3d4e89f9dde97b1ba8a, type: 3}
       propertyPath: 'enemiesGroup.Array.data[0]'
@@ -19105,6 +19105,10 @@ PrefabInstance:
       propertyPath: 'enemiesGroup.Array.data[2]'
       value: 
       objectReference: {fileID: 159301081}
+    - target: {fileID: 8706243467870627317, guid: 96ea031169ddf3d4e89f9dde97b1ba8a, type: 3}
+      propertyPath: 'enemiesGroup.Array.data[3]'
+      value: 
+      objectReference: {fileID: 1015055605}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -24592,12 +24596,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8706243467870627317, guid: 96ea031169ddf3d4e89f9dde97b1ba8a, type: 3}
       propertyPath: enemiesGroup.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8706243467870627317, guid: 96ea031169ddf3d4e89f9dde97b1ba8a, type: 3}
       propertyPath: 'enemiesGroup.Array.data[0]'
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2038070957}
     - target: {fileID: 8706243467870627317, guid: 96ea031169ddf3d4e89f9dde97b1ba8a, type: 3}
       propertyPath: 'enemiesGroup.Array.data[1]'
       value: 
@@ -35505,7 +35509,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8706243467870627317, guid: 96ea031169ddf3d4e89f9dde97b1ba8a, type: 3}
       propertyPath: enemiesGroup.Array.size
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8706243467870627317, guid: 96ea031169ddf3d4e89f9dde97b1ba8a, type: 3}
       propertyPath: 'enemiesGroup.Array.data[0]'
@@ -35519,6 +35523,10 @@ PrefabInstance:
       propertyPath: 'enemiesGroup.Array.data[2]'
       value: 
       objectReference: {fileID: 2058234677}
+    - target: {fileID: 8706243467870627317, guid: 96ea031169ddf3d4e89f9dde97b1ba8a, type: 3}
+      propertyPath: 'enemiesGroup.Array.data[3]'
+      value: 
+      objectReference: {fileID: 745236951}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -35587,11 +35595,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9007911916893921991, guid: 4ad5b3bbe32bf2a4e937c2b19059238c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 15.66
+      value: 35.4
       objectReference: {fileID: 0}
     - target: {fileID: 9007911916893921991, guid: 4ad5b3bbe32bf2a4e937c2b19059238c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.69
+      value: 4.8
       objectReference: {fileID: 0}
     - target: {fileID: 9007911916893921991, guid: 4ad5b3bbe32bf2a4e937c2b19059238c, type: 3}
       propertyPath: m_LocalPosition.z
