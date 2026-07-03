@@ -18,11 +18,18 @@ public class PlayerDetector : MonoBehaviour
 
     PlayerController detectedPlayer = null;
     private Coroutine caughtPlayerAfterDelayCoroutine = null;
+    private bool detectionDisabled = false;
     private void Start()
     {
         colorChecker = GetComponent<ColorChecker>();
         if (colorChecker == null){ Debug.LogError("Player detector needs color checker component to detect player"); }
         if (detectedPlayerAnnouncement != null) detectedPlayerAnnouncement.SetActive(false);
+
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.OnDiamondStolen.AddListener(OnDiamondStolen);
+            GameManager.Instance.OnRespawn.AddListener(OnRespawn);
+        }
     }
 
     /// Doi mau mask cua khach nay, dung cho AttendeeGroup de gom nhieu khach vao 1 mau chung.
@@ -37,8 +44,29 @@ public class PlayerDetector : MonoBehaviour
     {
         requireGrayscaleMask = value;
     }
+
+    /// <summary>Sau khi player lấy được kim cương, khách ngừng phát hiện player.</summary>
+    private void OnDiamondStolen()
+    {
+        detectionDisabled = true;
+        if (detectedPlayerAnnouncement != null) detectedPlayerAnnouncement.SetActive(false);
+        if (caughtPlayerAfterDelayCoroutine != null)
+        {
+            StopCoroutine(caughtPlayerAfterDelayCoroutine);
+            caughtPlayerAfterDelayCoroutine = null;
+        }
+    }
+
+    /// <summary>Khi respawn: khách phát hiện player trở lại (khôi phục trước diamond).</summary>
+    private void OnRespawn()
+    {
+        detectionDisabled = false;
+    }
+
     private void OnTriggerStay2D(Collider2D collision)
     {
+         if (detectionDisabled) return;
+         if (GameManager.Instance != null && GameManager.Instance.DiamondStolen) return;
          if (collision.GetComponent<PlayerController>() == null) return;
 
         detectedPlayer = collision.GetComponent<PlayerController>();

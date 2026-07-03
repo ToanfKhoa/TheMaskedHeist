@@ -36,6 +36,10 @@ public class CUIColorPicker : MonoBehaviour
     [SerializeField] private Image modeButtonIcon; // Image của nút bấm, sẽ đổi sprite theo mode
     [SerializeField] private Sprite[] modeSprites = new Sprite[4]; // theo thứ tự enum MaskMode: Normal, Grayscale, Cipher, TrapMask
 
+    // ── Bánh xe mặt nạ (UI) ──────────────────────────────────
+    [Header("Mask Wheel UI")]
+    [SerializeField] private MaskWheelUI maskWheel;
+
     public void SetOnValueChangeCallback(Action<Color> onValueChange)
     {
         _onValueChange = onValueChange;
@@ -53,6 +57,53 @@ public class CUIColorPicker : MonoBehaviour
         passwords = GameObject.FindGameObjectsWithTag("Password");
         _trapObjects = GameObject.FindGameObjectsWithTag("Trap");
         SetTrapSpritesVisible(false);
+
+        if (maskWheel != null)
+            maskWheel.Rebuild(_unlockedModes, modeSprites, (int)currentMode);
+
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.OnDiamondStolen.AddListener(OnDiamondStolen);
+            GameManager.Instance.OnRespawn.AddListener(OnRespawn);
+        }
+    }
+
+    /// <summary>Khi respawn: hiện lại thanh màu + bánh xe, dùng lại mặt nạ (khôi phục trước diamond).</summary>
+    private void OnRespawn()
+    {
+        gameObject.SetActive(true);
+        if (maskWheel != null)
+        {
+            maskWheel.gameObject.SetActive(true);
+            maskWheel.Rebuild(_unlockedModes, modeSprites, (int)currentMode);
+        }
+        UpdateModeSprite();
+        Setup(_color);
+    }
+
+    /// <summary>Khi lấy được kim cương: về Normal, tắt filter, ẩn cả cụm color panel + bánh xe,
+    /// ngừng dùng mặt nạ.</summary>
+    private void OnDiamondStolen()
+    {
+        currentMode = MaskMode.Normal;
+        SetTrapSpritesVisible(false);
+        if (filter != null) filter.SetActive(false);
+
+        // Bỏ tô màu, đưa mặt nạ player về Normal
+        if (playerObject != null)
+        {
+            var sr = playerObject.GetComponent<SpriteRenderer>();
+            if (sr != null)
+            {
+                if (modeSprites != null && modeSprites.Length > 0 && modeSprites[0] != null)
+                    sr.sprite = modeSprites[0];
+                sr.color = Color.white;
+            }
+        }
+
+        // Ẩn thanh màu + bánh xe (deactivate luôn dừng logic mask trong Update)
+        if (maskWheel != null) maskWheel.gameObject.SetActive(false);
+        gameObject.SetActive(false);
     }
 
     private static bool GetLocalMouse(GameObject go, out Vector2 result) //kiem tra tro chuot co trong object ko, tra ve vi tri cuc bo
@@ -135,7 +186,11 @@ public class CUIColorPicker : MonoBehaviour
     public void UnlockMode(int modeIndex)
     {
         if (modeIndex >= 0 && modeIndex < 4 && !_unlockedModes.Contains(modeIndex))
+        {
             _unlockedModes.Add(modeIndex);
+            if (maskWheel != null)
+                maskWheel.Rebuild(_unlockedModes, modeSprites, (int)currentMode);
+        }
     }
 
     public void SetMaskMode(int i)
@@ -164,6 +219,9 @@ public class CUIColorPicker : MonoBehaviour
 
         UpdateModeSprite();
         Setup(_color);
+
+        if (maskWheel != null)
+            maskWheel.RotateToMode(i);
     }
 
     /// <summary>Đổi sprite icon trên nút UI và sprite mặt nạ player đang đeo theo mode hiện tại.</summary>

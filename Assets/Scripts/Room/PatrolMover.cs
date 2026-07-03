@@ -10,6 +10,13 @@ public class PatrolMover : MonoBehaviour
 
     int _nextWaypointIndex;
     float _lastDeltaX;
+    bool _isChasing;
+
+    /// <summary>Gọi khi bị phát hiện/mất dấu player để dừng/tiếp tục tuần tra.</summary>
+    public void SetChasing(bool isChasing)
+    {
+        _isChasing = isChasing;
+    }
 
     void Start()
     {
@@ -22,7 +29,7 @@ public class PatrolMover : MonoBehaviour
 
     void Update()
     {
-        if (target == null || !IsPathValid())
+        if (target == null || !IsPathValid() || _isChasing)
             return;
 
         Vector3 currentPos = target.position;
