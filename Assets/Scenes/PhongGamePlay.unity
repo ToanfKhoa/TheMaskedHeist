@@ -2573,6 +2573,29 @@ Transform:
   - {fileID: 1678328429}
   m_Father: {fileID: 1035387866}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &159649474 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 582979849451799775, guid: d787c62d9aa52134b9be61f9f6f82a3d, type: 3}
+  m_PrefabInstance: {fileID: 1896780917}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &159649479
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 159649474}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e1cc9aeb3686db4aa5dbd3c4499f371, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  delayTime: 0.5
+  resumePatrolDelay: 1
+  detectedPlayerAnnouncement: {fileID: 1900914907}
+  patrolMover: {fileID: 1373904715}
+  animator: {fileID: 1812381805}
+  patrolingAnimatorParam: IsPatroling
 --- !u!1001 &165114338
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -22146,7 +22169,7 @@ GameObject:
   - component: {fileID: 1373904716}
   - component: {fileID: 1373904715}
   m_Layer: 0
-  m_Name: Square
+  m_Name: PatrolMover
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -22182,16 +22205,16 @@ MonoBehaviour:
   target: {fileID: 1120937331}
   waypoints:
   - {x: 0.38883272, y: 0.30243385, z: 0}
-  - {x: 0.37956166, y: -0.24786733, z: 0}
-  - {x: 0.122396976, y: -0.33523688, z: 0}
-  - {x: 0.12338671, y: 0.3469131, z: 0}
-  - {x: -0.15268081, y: 0.31777593, z: 0}
-  - {x: -0.15295894, y: -0.3520112, z: 0}
+  - {x: 0.37956166, y: -0.3406018, z: 0}
+  - {x: 0.12588222, y: -0.34673902, z: 0}
+  - {x: 0.11432439, y: 0.3184945, z: 0}
+  - {x: -0.13184598, y: 0.31777593, z: 0}
+  - {x: -0.13831986, y: -0.36079097, z: 0}
   - {x: -0.4220733, y: -0.35984215, z: 0}
   - {x: -0.42615435, y: 0.32292897, z: 0}
-  - {x: 0.12180224, y: 0.34064743, z: 0}
-  - {x: 0.1211832, y: -0.36565208, z: 0}
-  - {x: 0.37720343, y: -0.3761116, z: 0}
+  - {x: 0.11692254, y: 0.32658923, z: 0}
+  - {x: 0.123274356, y: -0.3669301, z: 0}
+  - {x: 0.3812824, y: -0.3417101, z: 0}
   moveSpeed: 5
   flipOnDirection: 1
 --- !u!212 &1373904716
@@ -22969,7 +22992,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3130241590735942698, guid: 8600ef4a00adc9e489cd6e707094992b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.42
+      value: 2.01
       objectReference: {fileID: 0}
     - target: {fileID: 3130241590735942698, guid: 8600ef4a00adc9e489cd6e707094992b, type: 3}
       propertyPath: m_LocalPosition.z
@@ -30752,6 +30775,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4c1575d33a4724d4b830731859b39a8a, type: 3}
+--- !u!95 &1812381805 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 9222545341398178372, guid: d787c62d9aa52134b9be61f9f6f82a3d, type: 3}
+  m_PrefabInstance: {fileID: 1896780917}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1817714945
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -32075,11 +32103,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: Dog
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedComponents:
+    - {fileID: 8638198471569294436, guid: d787c62d9aa52134b9be61f9f6f82a3d, type: 3}
+    m_RemovedGameObjects:
+    - {fileID: 7654795146878792193, guid: d787c62d9aa52134b9be61f9f6f82a3d, type: 3}
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 582979849451799775, guid: d787c62d9aa52134b9be61f9f6f82a3d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 159649479}
   m_SourcePrefab: {fileID: 100100000, guid: d787c62d9aa52134b9be61f9f6f82a3d, type: 3}
+--- !u!1 &1900914907 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6123744998440589663, guid: d787c62d9aa52134b9be61f9f6f82a3d, type: 3}
+  m_PrefabInstance: {fileID: 1896780917}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1906026780
 PrefabInstance:
   m_ObjectHideFlags: 0
