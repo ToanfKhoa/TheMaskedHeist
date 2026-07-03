@@ -26,6 +26,7 @@ public class CUIColorPicker : MonoBehaviour
         TrapMask
     }
     private MaskMode currentMode = MaskMode.Normal;
+    public MaskMode CurrentMode => currentMode;
     private readonly List<int> _unlockedModes = new List<int> { 0 }; // thứ tự unlock quyết định thứ tự cycle
     private GameObject[] _trapObjects;
     private readonly Dictionary<GameObject, int> _trapOriginalSortingOrder = new Dictionary<GameObject, int>();

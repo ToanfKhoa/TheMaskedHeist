@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float walkSpeed = 5f;
     [SerializeField] private float runSpeed = 8f;
     [SerializeField] GameObject mask;
+    [SerializeField] CUIColorPicker colorPicker;
     private float moveSpeed;
 
     private Vector2 moveInput = Vector2.zero;
@@ -34,6 +35,10 @@ public class PlayerController : MonoBehaviour
         {
             GameManager.Instance.OnDiamondStolen.AddListener(SpeedUp);
             GameManager.Instance.OnRespawn.AddListener(ResetSpeed);
+        }
+        if (colorPicker == null)
+        {
+            colorPicker = FindObjectOfType<CUIColorPicker>();
         }
     }
 
@@ -115,6 +120,11 @@ public class PlayerController : MonoBehaviour
             }
         }
         return Color.white;
+    }
+
+    public CUIColorPicker.MaskMode GetMaskMode()
+    {
+        return colorPicker != null ? colorPicker.CurrentMode : CUIColorPicker.MaskMode.Normal;
     }
 
     public void HoldDiamond(GameObject diamond)

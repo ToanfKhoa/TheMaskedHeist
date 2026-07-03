@@ -32,6 +32,15 @@ public class ColorChecker : MonoBehaviour
         int score = (int)(colorComparisionValue * 100);
         return Mathf.Clamp(score, 0, 100);
     }
+    // So sanh do sang (Value/grayscale) giua mau player va mau khach, dung cho cau do Gray Mask
+    // (Grayscale mode luon cho Hue = 0 nen khong the dung CompareColorHSV de phan biet cac muc xam)
+    public int CompareGrayscaleValue(Color playerColor, Color attendeeColor)
+    {
+        float valueDistance = Mathf.Abs(playerColor.grayscale - attendeeColor.grayscale);
+        float colorComparisionValue = 1 - valueDistance;
+        int score = (int)(colorComparisionValue * 100);
+        return Mathf.Clamp(score, 0, 100);
+    }
     public static Color GetColorFromGameObject(GameObject obj)
     {
         // Kiem tra neu object cco spriterenderer
