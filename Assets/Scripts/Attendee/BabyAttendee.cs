@@ -51,6 +51,7 @@ public class BabyAttendee : MonoBehaviour
     private IEnumerator PlayWithPlayer()
     {
         _detectedText.SetActive(true);
+        PlayerEvents.RaiseOnFreezePlayer();
         if (_attendeeMovement != null)
         {
             _attendeeMovement.StopMovement();

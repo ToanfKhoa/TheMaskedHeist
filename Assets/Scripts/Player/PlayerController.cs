@@ -40,6 +40,25 @@ public class PlayerController : MonoBehaviour
         {
             colorPicker = FindObjectOfType<CUIColorPicker>();
         }
+
+        PlayerEvents.OnFreezePlayer += HandleFreezePlayer;
+        PlayerEvents.OnUnfreezePlayer += HandleUnfreezePlayer;
+    }
+
+    private void OnDestroy()
+    {
+        PlayerEvents.OnFreezePlayer -= HandleFreezePlayer;
+        PlayerEvents.OnUnfreezePlayer -= HandleUnfreezePlayer;
+    }
+
+    private void HandleFreezePlayer()
+    {
+        SetMovementLocked(true);
+    }
+
+    private void HandleUnfreezePlayer()
+    {
+        SetMovementLocked(false);
     }
 
     private void ResetSpeed()
