@@ -17,6 +17,7 @@ public class Exit : MonoBehaviour
         {
             GameManager.Instance.OnGameStart.AddListener(HideExit);
             GameManager.Instance.OnDiamondStolen.AddListener(ShowExit);
+            GameManager.Instance.OnRespawn.AddListener(HideExit);
         }
         HideExit();
     }
