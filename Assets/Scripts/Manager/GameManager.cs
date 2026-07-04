@@ -33,6 +33,8 @@ public class GameManager : MonoBehaviour
     private Camera gameplayCamera;
     private bool isLoseCutSceneLoading = false;
     public bool IsGameOver => isLoseCutSceneLoading;
+    private bool isLoseCutSceneActive = false;
+    private bool isRespawning = false;
     private bool diamondStolen = false;
     public bool DiamondStolen => diamondStolen;
 
@@ -68,6 +70,12 @@ public class GameManager : MonoBehaviour
         {
             undetectable = !undetectable;
             Debug.Log("[CHEAT] Player undetectable = " + undetectable);
+        }
+
+        // N để bỏ qua animation thua cuộc và respawn ngay lập tức.
+        if (isLoseCutSceneActive && Input.GetKeyDown(KeyCode.N))
+        {
+            RespawnPlayer();
         }
     }
 
@@ -114,10 +122,16 @@ public class GameManager : MonoBehaviour
 
         if (gameplayCamera != null)
             gameplayCamera.gameObject.SetActive(false);
+
+        isLoseCutSceneActive = true;
     }
 
     public void RespawnPlayer()
     {
+        if (isRespawning) return;
+        isRespawning = true;
+        isLoseCutSceneActive = false;
+
         Vector2 spawnPosition = hasCheckpoint ? checkpointPosition : initialPlayerPosition;
 
         StartCoroutine(UnloadLoseCutScene(spawnPosition));
@@ -144,6 +158,7 @@ public class GameManager : MonoBehaviour
         OnRespawn.Invoke();
 
         isLoseCutSceneLoading = false;
+        isRespawning = false;
     }
 
     public void HandleDiamondStolen()
