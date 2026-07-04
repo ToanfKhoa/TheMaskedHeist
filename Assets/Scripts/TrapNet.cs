@@ -12,6 +12,8 @@ public class TrapNet : MonoBehaviour
     {
         if (_active) return;
         if (!collision.CompareTag("Player")) return;
+        // Sau khi lấy kim cương (pha tẩu thoát) thì vô hiệu bẫy; tự bật lại khi respawn.
+        if (GameManager.Instance != null && GameManager.Instance.DiamondStolen) return;
 
         var player = collision.GetComponent<PlayerController>();
         if (player == null) return;

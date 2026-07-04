@@ -66,7 +66,7 @@ public class PlayerDetector : MonoBehaviour
     private void OnTriggerStay2D(Collider2D collision)
     {
          if (detectionDisabled) return;
-         if (GameManager.Instance != null && GameManager.Instance.DiamondStolen) return;
+         if (GameManager.Instance != null && (GameManager.Instance.DiamondStolen || GameManager.Instance.Undetectable)) return;
          if (collision.GetComponent<PlayerController>() == null) return;
 
         detectedPlayer = collision.GetComponent<PlayerController>();

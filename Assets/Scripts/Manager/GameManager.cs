@@ -36,6 +36,10 @@ public class GameManager : MonoBehaviour
     private bool diamondStolen = false;
     public bool DiamondStolen => diamondStolen;
 
+    // Cheat test/demo: bật = player không bị phát hiện/bắt. Bật/tắt bằng phím P.
+    private bool undetectable = false;
+    public bool Undetectable => undetectable;
+
     private void Awake()
     {
         if (instance != null && instance != this)
@@ -57,6 +61,16 @@ public class GameManager : MonoBehaviour
         SoundManager.Instance.PlayMusic(SoundManager.Instance.partyMusic1);
     }
 
+    private void Update()
+    {
+        // Cheat test/demo: P để bật/tắt khả năng bị phát hiện của player.
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            undetectable = !undetectable;
+            Debug.Log("[CHEAT] Player undetectable = " + undetectable);
+        }
+    }
+
     public void SetCheckpoint(Vector2 position)
     {
         checkpointPosition = position;
@@ -65,6 +79,7 @@ public class GameManager : MonoBehaviour
 
     public void HandlePlayerFound()
     {
+        if (undetectable) return; // cheat test/demo: player không bị bắt
         if (isLoseCutSceneLoading) return;
 
         Debug.Log("Player Found! Game Over.");
