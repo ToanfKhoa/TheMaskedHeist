@@ -28,6 +28,11 @@ public class KeypadController : MonoBehaviour
     void Start()
     {
         ResetKeypad();
+
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.OnRespawn.AddListener(ResetKeypad);
+        }
     }
 
     public void PressKey(string key)
@@ -83,6 +88,11 @@ public class KeypadController : MonoBehaviour
             statusText.text = "SYSTEM LOCKED";
             statusText.color = Color.red;
             OnGameOver?.Invoke();
+
+            if (GameManager.Instance != null)
+            {
+                GameManager.Instance.HandlePlayerFound();
+            }
         }
         else
         {
